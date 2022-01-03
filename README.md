@@ -12,4 +12,9 @@
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="html" height="30"/>
   <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white" alt="css" height="30"/>
 </span>
+
 </br></br>
+
+<b>The project follows Model-View-Controller design pattern</b><br />
+<p align='center'><a href="#"><img align='center' src="https://github.com/AlmogJakov/TutorTime/blob/main/images/mvc.png" width="300"></a></p>   
+<br />
