@@ -1,5 +1,5 @@
-const Joi = require('joi');
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 /*
     app.get();
@@ -7,6 +7,24 @@ const app = express();
     app.put();
     app.delete();
 */
+const controllerRouter = require('./routes/controller');
+
+//init engine
+app.set('view engine', 'ejs')
+
+//where front files will be
+app.set('views', __dirname + '/views');
+
+//where layouts files will be
+app.set('layout', 'layouts/layout');
+app.use(expressLayouts);
+
+//where style files will be
+app.use(express.static('views/public'))
+
+
+app.use('/', controllerRouter);
+
 
 app.get('/', (req,res) => { //(URL || Path , Call back function)
     res.send('Our Website! Part B'); //what we send back
