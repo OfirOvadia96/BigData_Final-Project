@@ -21,12 +21,16 @@ app.set('views', __dirname + '/views');
 //where layouts files will be
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
-
+app.get('/', function (req, res) {
+    res.redirect("/pages/dashboard.html")
+})
 //where style files will be
-app.use(express.static('views/public'))
+app.use('/',express.static('./views/dashboard'))
 
 
-app.use('/', controllerRouter);
+
+
+// app.use('/', controllerRouter);
 
 
 // app.get('/', (req, res) => { //(URL || Path , Call back function)
