@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const createClient = require("redis").createClient;
 var bodyParser = require('body-parser')
+const kafka = require('../kafka/ConsumeFromKafka/consume');
 
 const controllerRouter = require('./routes/controller');
 
@@ -28,15 +29,12 @@ app.get('/', function (req, res) {
 app.use('/',express.static('./views/dashboard'))
 
 
+//------------Consumer from Kafka-----------------
+kafka.consumer.on("data", (msg) => {
+    let massage = JSON.parse(msg.value);
+    console.log(massage);
+});
 
-
-// app.use('/', controllerRouter);
-
-
-// app.get('/', (req, res) => { //(URL || Path , Call back function)
-//     // res.send('Our Website! Part B'); //what we send back
-//     res.sendFile(__dirname + "/views/dashboard/pages/dashboard.html"); 
-// });
 
 
 app.post("/", async (req, res) => {
