@@ -36,6 +36,11 @@ kafka.consumer.on("data", (msg) => {
 });
 
 
+// app.use('/', controllerRouter);
+
+// app.get('/', (req, res) => { //(URL || Path , Call back function)
+// });
+
 
 app.post("/", async (req, res) => {
 
