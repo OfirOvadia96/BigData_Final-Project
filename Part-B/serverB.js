@@ -32,10 +32,7 @@ app.use('/',express.static('./views/dashboard'))
 
 // app.use('/', controllerRouter);
 
-
 // app.get('/', (req, res) => { //(URL || Path , Call back function)
-//     // res.send('Our Website! Part B'); //what we send back
-//     res.sendFile(__dirname + "/views/dashboard/pages/dashboard.html"); 
 // });
 
 
