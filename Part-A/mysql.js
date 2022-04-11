@@ -1,9 +1,7 @@
-const express = require('express');
 const mysql = require('mysql');
 const {faker} = require("@faker-js/faker");
 
-const app = express();
-
+//Connect to MySQL DB
 var connection = mysql.createConnection({
     //Properties
     host: 'localhost',
@@ -12,6 +10,7 @@ var connection = mysql.createConnection({
     database: 'big_data'
 });
 
+//Function to create fake details person
 const randomPerson = () => {
     let id = Math.floor(Math.random() * 1000000000);
     let firstName = faker.name.firstName();
@@ -27,6 +26,7 @@ const randomPerson = () => {
     return person;
 }
 
+//Insert fake details person to DB (Table - users)
 connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
@@ -34,10 +34,10 @@ connection.connect(function(err) {
     for (let i = 0; i < 30; i++) {
 
         let person = randomPerson();
-
+        //Query of MySQL
         var sql = `INSERT INTO users (id, first_name,last_name,phone,city,gender,age,prev_calls) 
             VALUES (${person.id},'${person.firstName}','${person.lastName}','${person.phone}','${person.randomCity}','${person.randomGender}',${person.age},0);`;
-
+        //Insert row
         connection.query(sql, function (err, result) {
           if (err) throw err;
           console.log(`${i+1} record inserted`);
@@ -47,10 +47,4 @@ connection.connect(function(err) {
     connection.end();
   });
 
-// connection.query('SELECT * FROM users', (err,rows) => {
-//     if(err) throw err;
-  
-//     console.log('Data received from Db:');
-//     console.log(rows);
-//   });
-
+  //truncate big_data.users; - Delete all rows from table

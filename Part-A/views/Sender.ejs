@@ -8,40 +8,47 @@
     -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script>
+        // const mysql = require('mysql');
+        // //Connect to MySQL DB
+        // var connection = mysql.createConnection({
+        //     //Properties
+        //     host: 'localhost',
+        //     user: 'root',
+        //     password: 'Lior4007',
+        //     database: 'big_data'
+        // });
+
         function initSocket() {
             //socket is global
             socket = io.connect();
             alert("connected");
         }
 
+        //Send to socket the current waiting calls
         function sendMessage(total) {
             socket.emit("totalWaitingCalls", { totalWaiting: total });
         }
     </script>
     <script>
-
-        const mysql = require('mysql');
-
-        var connection = mysql.createConnection({
-            //Properties
-            host: 'localhost',
-            user: 'root',
-            password: 'Lior4007',
-            database: 'big_data'
-        });
-
-        const randomPerson = () => {
-            connection.connect(function(err) {
-                if (err) throw err;
-                con.query("SELECT * FROM users ORDER BY RAND() LIMIT 1", function (err, result, fields) {
-                    if (err) throw err;
-                    console.log(result);
-                });
-            });
-        }
+        
+        // const randomPerson = () => {
+        //     connection.connect(function(err) {
+        //         if (err) throw err;
+        //         con.query("SELECT * FROM users ORDER BY RAND() LIMIT 1", function (err, result, fields) {
+        //             if (err) throw err;
+        //             console.log(result);
+        //         });
+        //     });
+        // }
+        var countCalls = 0;
 
         //Show the data on screen
-        function startConv() {
+        function NewCall() {
+
+            countCalls++;
+            var counter = document.querySelector('.counter');
+            counter.innerHTML = countCalls;
+
             var tr = document.getElementById('openConversations').insertRow();
             var cID = tr.insertCell(0);
             var cFirstName = tr.insertCell(1);
@@ -93,7 +100,8 @@
             message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
             message.product = (row.cells[9].getElementsByTagName('select')[0].value || 18);
             message.topic = (row.cells[10].getElementsByTagName('select')[0].value || 18);
-
+            
+            //Send to socket the call details
             socket.emit("callDetails", message);
             deleteRow(row);
         }
@@ -102,6 +110,10 @@
         function deleteRow(row) {
             var i = row.rowIndex;
             document.getElementById('openConversations').deleteRow(i);
+
+            countCalls--;
+            var counter = document.querySelector('.counter');
+            counter.innerHTML = countCalls;
         }
 
 
@@ -109,13 +121,12 @@
 </head>
 
 <body onload="initSocket()">
-    Total Waiting calls:
-    <input type="number" id="total" min="0" max="200" value="0">
+    <div type="number" id="total" min="0" max="200" value="0">Total Waiting calls: <h1 class="counter"></h1></div>
     <input type="button" value="Set" onclick="sendMessage(total.value)" />
     &nbsp;
     <select><option value='Emergency'>חגים</option><option>חופשות קיץ</option><option>ימים רגילים</option></select>
     <hr>
-    <input type="button" onclick="startConv()" value="Answer Call" />
+    <input type="button" onclick="NewCall()" value="New Call" />
     <table id="openConversations" border="1" style="background-color: burlywood;">
         <tr>
             <th>ID</th>
