@@ -18,7 +18,7 @@ RUN  apt-get update -qqy \
     libsasl2-dev \
     libsasl2-modules \
     make \
-    # python \
+    python \
     nodejs npm ca-certificates \
     && rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
@@ -28,5 +28,5 @@ COPY *.js *.json *.md /usr/src/app/
 
 RUN npm install -d
 ENV LD_LIBRARY_PATH=/usr/src/app/node_modules/node-rdkafka/build/deps
-ENTRYPOINT [ "node", "app.js", "consume.js" ]
+ENTRYPOINT [ "node", "app.js"]
 CMD [ "" ]
