@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const createClient = require("redis").createClient;
 var bodyParser = require('body-parser')
+const kafka = require('../kafka/ConsumeFromKafka/consume');
 
 const controllerRouter = require('./routes/controller');
 const {
@@ -31,6 +32,13 @@ app.get('/', function (req, res) {
 // where style files will be
 app.use('/', express.static('./views/dashboard'))
 
+
+
+//------------Consumer from Kafka-----------------
+kafka.consumer.on("data", (msg) => {
+    let massage = JSON.parse(msg.value);
+    console.log(massage);
+});
 
 // app.use('/', controllerRouter);
 
