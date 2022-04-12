@@ -5,7 +5,7 @@ const io = require("socket.io")(server);
 var db = require('./mysql');
 // const kafka = require("../kafka/PublishToKafka/publish")
 
-const port = 3027
+const port = 3010
 
 const bodyParser = require('body-parser');
 
@@ -17,17 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
-
-// db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", function (err, result, fields) {
-//     if (err) throw err;
-//     console.log(result);
-// });
-
-//------- Client side - Call Generator ------------------
+//------- Client side - Call Generator of users from MySQL -------------
 app.get('/', (req, res) => {
     db.query("SELECT * FROM users;", function (err, result, fields) {
         if (err) throw err;
-        // console.log(result);
         res.render('index', {data: result})
     });
 })
@@ -35,7 +28,7 @@ app.get('/', (req, res) => {
 //--- Socket.io - Produce call details to kafka ----------------
 io.on("connection", (socket) => {
     console.log("new user connected");
-    socket.on("totalWaitingCalls", (msg) => { console.log(msg.totalWaiting) });
+    // socket.on("totalWaitingCalls", (msg) => { console.log(msg.totalWaiting) });
     // socket.on("callDetails", (msg) => { kafka.publish(msg) });
 });
 

@@ -67,7 +67,7 @@
             cCity.innerHTML = "<div>"+`${person.city}`+"</div>";
             cGender.innerHTML = "<div>"+`${person.gender}`+"</div>";
             cAge.innerHTML = "<div>"+`${person.age}`+"</div>";
-            cPrevCalls.innerHTML = "<div>"+`${person.prevCalls}`+"</div>";
+            cPrevCalls.innerHTML = `<input type="number" "min="10" max="100">`;
             cStart.innerHTML = "<div id='" + date + "''>" + `${day}-${month}-${year} ,${hour}:${minute}` + "</div>";
             cProduct.innerHTML = "<select><option value='internet'>אינטרנט ביתי</option><option value='cables'>כבלים</option><option value='cellular'>סלולרי</option><option value='all'>כולם</option></select>";
             cTopic.innerHTML = "<select><option value='join'>הצטרפות</option><option value='service'>שירות</option><option value='complaint'>תלונה</option><option value='leave'>בקשת ניתוק</option></select>";
@@ -89,7 +89,7 @@
             message.city = row.cells[4].getElementsByTagName('div')[0].value;
             message.gender = row.cells[5].getElementsByTagName('div')[0].value;
             message.age = row.cells[6].getElementsByTagName('div')[0].value;
-            message.prevCalls = row.cells[7].getElementsByTagName('div')[0].value;
+            message.prevCalls = row.cells[7].getElementsByTagName('input')[0].value;
             message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
             message.product = (row.cells[9].getElementsByTagName('select')[0].value || 18);
             message.topic = (row.cells[10].getElementsByTagName('select')[0].value || 18);

@@ -28,5 +28,5 @@ COPY *.js *.json *.md /usr/src/app/
 
 RUN npm install -d
 ENV LD_LIBRARY_PATH=/usr/src/app/node_modules/node-rdkafka/build/deps
-ENTRYPOINT [ "node", "app.js"]
+ENTRYPOINT [ "node", "publish.js"]
 CMD [ "" ]
