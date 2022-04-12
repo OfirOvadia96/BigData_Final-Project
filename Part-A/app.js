@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
 const io = require("socket.io")(server);
+var db = require('./mysql');
 // const kafka = require("../kafka/PublishToKafka/publish")
 
-const port = 3001
+const port = 3027
 
 const bodyParser = require('body-parser');
 
@@ -16,8 +17,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
+
+// db.query("SELECT * FROM users ORDER BY RAND() LIMIT 1;", function (err, result, fields) {
+//     if (err) throw err;
+//     console.log(result);
+// });
+
 //------- Client side - Call Generator ------------------
-app.get('/', (req, res) => res.render('sender'))
+app.get('/', (req, res) => {
+    db.query("SELECT * FROM users;", function (err, result, fields) {
+        if (err) throw err;
+        // console.log(result);
+        res.render('index', {data: result})
+    });
+})
 
 //--- Socket.io - Produce call details to kafka ----------------
 io.on("connection", (socket) => {

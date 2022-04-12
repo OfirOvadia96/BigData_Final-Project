@@ -31,7 +31,7 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 5; i++) {
 
         let person = randomPerson();
         //Query of MySQL
@@ -44,7 +44,15 @@ connection.connect(function(err) {
         });
     }
 
-    connection.end();
+    // connection.query("SELECT * FROM users ORDER BY RAND() LIMIT 1", function (err, result, fields) {
+    //     if (err) throw err;
+    //     // console.log(result[0].first_name);
+    //     details = result[0];
+    // });
+
+    // connection.end();
   });
+
+  module.exports = connection;
 
   //truncate big_data.users; - Delete all rows from table

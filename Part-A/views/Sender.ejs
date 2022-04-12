@@ -115,12 +115,11 @@
             var counter = document.querySelector('.counter');
             counter.innerHTML = countCalls;
         }
-
-
     </script>
 </head>
 
 <body onload="initSocket()">
+    <h1><%= data %></h1>
     <div type="number" id="total" min="0" max="200" value="0">Total Waiting calls: <h1 class="counter"></h1></div>
     <input type="button" value="Set" onclick="sendMessage(total.value)" />
     &nbsp;
