@@ -3,9 +3,9 @@ const app = express();
 var server = require('http').createServer(app);
 const io = require("socket.io")(server);
 var db = require('./mysql');
-// const kafka = require("../kafka/PublishToKafka/publish")
+const kafka = require("../kafka/PublishToKafka/publish")
 
-const port = 3010
+const port = 3020
 
 const bodyParser = require('body-parser');
 
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 io.on("connection", (socket) => {
     console.log("new user connected");
     // socket.on("totalWaitingCalls", (msg) => { console.log(msg.totalWaiting) });
-    // socket.on("callDetails", (msg) => { kafka.publish(msg) });
+    socket.on("callDetails", (msg) => { kafka.publish(msg) });
 });
 
 server.listen(port, () => console.log(`Call Generator app listening at http://localhost:${port}`));

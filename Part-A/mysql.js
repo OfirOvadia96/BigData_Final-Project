@@ -16,7 +16,7 @@ const randomPerson = () => {
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
     let phone = faker.phone.phoneNumber();
-    let city = ['Jerusalem', 'Nahariya', 'Haifa', 'Tel Aviv', 'Ashdod', 'Ashkelon', 'Beer Sheva'];
+    let city = ['Jerusalem', 'Nahariya', 'Haifa', 'Tel-Aviv', 'Ashdod', 'Ashkelon', 'Beer-Sheva'];
     const randomCity = city[Math.floor(Math.random() * city.length)];
     let gender = ['Female','Male'];
     let randomGender = gender[Math.floor(Math.random() * gender.length)];
@@ -43,14 +43,6 @@ connection.connect(function(err) {
           console.log(`${i+1} record inserted`);
         });
     }
-
-    // connection.query("SELECT * FROM users ORDER BY RAND() LIMIT 1", function (err, result, fields) {
-    //     if (err) throw err;
-    //     // console.log(result[0].first_name);
-    //     details = result[0];
-    // });
-
-    // connection.end();
   });
 
   module.exports = connection;

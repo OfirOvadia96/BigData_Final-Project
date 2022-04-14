@@ -23,7 +23,6 @@
 
         var countCalls = 0;
         var rows = <%-JSON.stringify(data)%>
-        // console.log(data);
 
         function randomPerson(){
             var min = 0;
@@ -60,13 +59,13 @@
             const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(date)
 
             var person = randomPerson();
-            cID.innerHTML = "<div>"+`${person.id}`+ "</div>";
-            cFirstName.innerHTML = "<div>"+`${person.first_name}`+"</div>";
-            cLastName.innerHTML = "<div>"+`${person.last_name}`+"</div>";
-            cPhone.innerHTML = "<div>"+`${person.phone}`+"</div>";
-            cCity.innerHTML = "<div>"+`${person.city}`+"</div>";
-            cGender.innerHTML = "<div>"+`${person.gender}`+"</div>";
-            cAge.innerHTML = "<div>"+`${person.age}`+"</div>";
+            cID.innerHTML = `<div id=${person.id}>${person.id}</div>`;
+            cFirstName.innerHTML = `<div id=${person.first_name}>${person.first_name}</div>`;
+            cLastName.innerHTML = `<div id=${person.last_name}>${person.last_name}</div>`;
+            cPhone.innerHTML = `<div id=${person.phone}>${person.phone}</div>`;
+            cCity.innerHTML = `<div id=${person.city}>${person.city}</div>`;
+            cGender.innerHTML = `<div id=${person.gender}>${person.gender}</div>`;
+            cAge.innerHTML = `<div id=${person.age}>${person.age}</div>`;
             cPrevCalls.innerHTML = `<input type="number" "min="10" max="100">`;
             cStart.innerHTML = "<div id='" + date + "''>" + `${day}-${month}-${year} ,${hour}:${minute}` + "</div>";
             cProduct.innerHTML = "<select><option value='internet'>אינטרנט ביתי</option><option value='cables'>כבלים</option><option value='cellular'>סלולרי</option><option value='all'>כולם</option></select>";
@@ -74,7 +73,7 @@
             cEnd.innerHTML = "<button onclick='reportEndCall(this.parentNode.parentNode)'>סיום</button>";
         }
 
-        function reportEndCall(row) {
+        function reportEndCall(row, person) {
             
             var totalCalls = parseInt(document.getElementById("total").value) || 0;
             if (parseInt(totalCalls) > 0) {
@@ -86,13 +85,14 @@
             message.firstName = row.cells[1].getElementsByTagName('div')[0].id;
             message.lastName = row.cells[2].getElementsByTagName('div')[0].id;
             message.phone = row.cells[3].getElementsByTagName('div')[0].id;
-            message.city = row.cells[4].getElementsByTagName('div')[0].value;
-            message.gender = row.cells[5].getElementsByTagName('div')[0].value;
-            message.age = row.cells[6].getElementsByTagName('div')[0].value;
+            message.city = row.cells[4].getElementsByTagName('div')[0].id;
+            message.gender = row.cells[5].getElementsByTagName('div')[0].id;
+            message.age = row.cells[6].getElementsByTagName('div')[0].id;
             message.prevCalls = row.cells[7].getElementsByTagName('input')[0].value;
-            message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
-            message.product = (row.cells[9].getElementsByTagName('select')[0].value || 18);
-            message.topic = (row.cells[10].getElementsByTagName('select')[0].value || 18);
+            var startcall = row.cells[8].getElementsByTagName('div')[0].id;
+            message.totalTime = (parseInt(Date.now()) - parseInt(startcall)) / 1000; // seconds
+            message.product = (row.cells[9].getElementsByTagName('select')[0].value);
+            message.topic = (row.cells[10].getElementsByTagName('select')[0].value);
             
             //Send to socket the call details
             socket.emit("callDetails", message);
