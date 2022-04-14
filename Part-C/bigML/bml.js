@@ -5,11 +5,12 @@
 
 var bigml = require('bigml');
 var fs = require("fs");
+require("../MongoDB/exportDB");
 
 var connection = new bigml.BigML('LIORATIYA','4084760438bee80f1b62c41d3ffaeeb7f3eb7751')
 
 var source = new bigml.Source(connection);
-source.create('./iris.csv', function(error, sourceInfo) {
+source.create('../MongoDB/callDetails.csv', function(error, sourceInfo) {
   if (!error && sourceInfo) {
     var dataset = new bigml.Dataset(connection);
     dataset.create(sourceInfo, function(error, datasetInfo) {

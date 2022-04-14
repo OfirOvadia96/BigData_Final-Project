@@ -1,0 +1,11 @@
+{"level":"error"}
+{"date":"Fri Apr 15 2022 01:34:16 GMT+0300 (שעון ישראל (קיץ))","error":{},"exception":true,"level":"error","message":"uncaughtException: Cannot read properties of undefined (reading 'status')\nTypeError: Cannot read properties of undefined (reading 'status')\n    at C:\\Users\\liora\\Desktop\\BigData-Final-Project\\Part-C\\bigML\\node_modules\\bigml\\lib\\BigML.js:222:59\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)","os":{"loadavg":[0,0,0],"uptime":12422},"process":{"argv":["C:\\Program Files\\nodejs\\node.exe","C:\\Users\\liora\\Desktop\\BigData-Final-Project\\Part-C\\bigML\\predict.js"],"cwd":"C:\\Users\\liora\\Desktop\\BigData-Final-Project\\Part-C\\bigML","execPath":"C:\\Program Files\\nodejs\\node.exe","gid":null,"memoryUsage":{"arrayBuffers":309441,"external":1557089,"heapTotal":71204864,"heapUsed":40565080,"rss":100536320},"pid":8068,"uid":null,"version":"v16.14.0"},"stack":"TypeError: Cannot read properties of undefined (reading 'status')\n    at C:\\Users\\liora\\Desktop\\BigData-Final-Project\\Part-C\\bigML\\node_modules\\bigml\\lib\\BigML.js:222:59\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)","trace":[{"column":59,"file":"C:\\Users\\liora\\Desktop\\BigData-Final-Project\\Part-C\\bigML\\node_modules\\bigml\\lib\\BigML.js","function":null,"line":222,"method":null,"native":false},{"column":5,"file":"node:internal/process/task_queues","function":"processTicksAndRejections","line":96,"method":null,"native":false}]}
+{"level":"error","message":"Remote request failed: Error: Request failed with status code 401"}
+{"level":"error","message":"Request processing error: Error: Request failed with status code 401"}
+{"level":"error","message":"Retrying get for undefined (undefined).. "}
+{"level":"error","message":"Remote request failed: Error: Request failed with status code 401"}
+{"level":"error","message":"Request processing error: Error: Request failed with status code 401"}
+{"level":"error","message":"Retrying get for undefined (undefined).. "}
+{"level":"error","message":"Remote request failed: Error: Request failed with status code 401"}
+{"level":"error","message":"Request processing error: Error: Request failed with status code 401"}
+{"level":"error","message":"Retrying get for undefined (undefined).. "}

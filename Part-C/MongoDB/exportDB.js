@@ -3,9 +3,9 @@ const Collection = require('./createTable');
 const Json2csvParser = require("json2csv").Parser;
 const mongoose = require('mongoose');
 
-Collection.find({}).lean().exec((err, data) => {
+Collection.find({},{_id:0}).lean().exec((err, data) => {
     if (err) throw err;
-    const csvFields = ['city', 'gender', 'age','prevCalls','product','topic','totalTime']
+    const csvFields = ['id','firstName','lastName','phone','city', 'gender', 'age','prevCalls','totalTime','product','topic']
     console.log(csvFields);
     const json2csvParser = new Json2csvParser({
         csvFields
