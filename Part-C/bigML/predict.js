@@ -1,7 +1,8 @@
 var bigml = require('bigml');
 var fs = require("fs");
 
-var connection = new bigml.BigML('LIORATIYA','4084760438bee80f1b62c41d3ffaeeb7f3eb7751')
+//dont forget to change name and id to your user
+var connection = new bigml.BigML('OFIRRR999','bce5e228c27e09db2e07949f5943d097f110c368')
 var prediction = new bigml.Prediction(connection);
 
 fs.readFile('model.txt', 'utf8', function(err, data){
