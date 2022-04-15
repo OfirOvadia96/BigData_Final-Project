@@ -12,11 +12,11 @@ app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views');
 
 //where layouts files will be
-app.set('layout', 'layouts/layout');
+app.set('layout', 'index');
 app.use(expressLayouts);
 
 //where style files will be
-app.use(express.static('views/public'))
+app.use(express.static('views/public'));
 
 
 app.use('/', controllerRouter);
