@@ -16,8 +16,16 @@
 <br>
 <br>
 
-<button onclick="bigml()">Create new model</button>
+<button onclick="train()">Create new model</button>
 <button onclick="predict()">Predict</button>
+<script>
+    function train() {
+      socket.emit('train', "msg");
+    }
 
+    function predict(value) {
+      socket.emit('predict', value);
+    }
+</script>
 </body>
 </html>

@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
-module.exports = router;
+
+// var newcall;
+
+// //------------Consumer from Kafka-----------------
+// kafka.consumer.on("data", (msg) => {
+//     newcall = msg.value;
+// });
+
+//---------------------------------------------
 
 router.get('/', (req,res) => { //(URL || Path , Call back function)
-    res.render('index');
+   // res.send('Our Website Part A');
+    res.render('index',{data: "newcall"});
 });
 
 /*
@@ -12,3 +21,5 @@ router.get('/', (req,res) => { //(URL || Path , Call back function)
     app.put();
     app.delete();
 */
+
+module.exports = router;
