@@ -6,16 +6,18 @@ const app = express();
 const controllerRouter = require('./routes/controller');
 
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
+
+//where front files will be
+app.set('views', __dirname + '/views');
+
+//where layouts files will be
+app.set('layout', 'index');
+app.use(expressLayouts);
+
+//where style files will be
+app.use(express.static('views/public'));
 
 app.use('/', controllerRouter);
-
-// //where front files will be
-// app.set('views', __dirname + '/views');
-
-// //where layouts files will be
-// app.set('layout', 'layouts/layout');
-// app.use(expressLayouts);
 
 // can set PORT to be other num (By the command: set PORT=number)
 const myPort = process.env.PORT || 3000;

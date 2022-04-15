@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>BigML</title>
 </head>
 <body>
-    <h1><%-data%></h1>
-    <!-- <button onclick="train()">Train</button> -->
-    <input type="button" value="Train Dataset" onclick="train()" />
-    <input type="button" value="Predict call topic" onclick="predict()" />
+    <img src="bigml.png" alt="bigml">
+    <br>
+    <h1>Predicting the topic of conversation</h1>
+    <br>
+<br>
+<br>
+<br>
 
-    <script>
-        function train() {
-          socket.emit('train', "msg");
-        }
+<button onclick="train()">Create new model</button>
+<button onclick="predict()">Predict</button>
+<script>
+    function train() {
+      socket.emit('train', "msg");
+    }
 
-        function predict(value) {
-          socket.emit('predict', value);
-        }
-    </script>
-
+    function predict(value) {
+      socket.emit('predict', value);
+    }
+</script>
 </body>
 </html>
