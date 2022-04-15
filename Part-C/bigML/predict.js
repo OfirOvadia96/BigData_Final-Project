@@ -1,6 +1,7 @@
 var bigml = require('bigml');
 var fs = require("fs");
 
+//dont forget to change name and id to your user
 var connection = new bigml.BigML('OFIRRR999','bce5e228c27e09db2e07949f5943d097f110c368')
 var prediction = new bigml.Prediction(connection);
 
