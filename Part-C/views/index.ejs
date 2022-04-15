@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%-data%></h1>
+    <!-- <button onclick="train()">Train</button> -->
+    <input type="button" value="Train Dataset" onclick="train()" />
+    <input type="button" value="Predict call topic" onclick="predict()" />
+
+    <script>
+        function train() {
+          socket.emit('train', "msg");
+        }
+
+        function predict(value) {
+          socket.emit('predict', value);
+        }
+    </script>
+
+</body>
+</html>

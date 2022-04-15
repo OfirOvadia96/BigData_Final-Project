@@ -1,4 +1,4 @@
-const kafka = require('../../kafka/ConsumeFromKafka/consume');
+const kafka = require('../../../kafka/ConsumeFromKafka/consume');
 const callDetails = require('./createTable');
 
 //------------Consumer from Kafka-----------------
