@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "bigml": "^1.25.2"
+    "bigml": "^1.25.2",
+    "mongoose": "^6.3.0"
   }
 }
