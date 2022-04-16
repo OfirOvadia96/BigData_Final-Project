@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>BigML</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script type='text/javascript'>
+
+      function initSocket() {
+          //socket is global
+          socket = io.connect();
+          alert("connected");
+      }
+
+      socket.on('prediction', function (msg) {
+        alert(msg);
+      });
+
+    </script>
 </head>
-<body>
-    <img src="bigml.png" alt="bigml">
+<body onload="initSocket()">
+    <img src="./public/bigml.png" alt="bigml">
     <br>
     <h1>Predicting the topic of conversation</h1>
     <br>

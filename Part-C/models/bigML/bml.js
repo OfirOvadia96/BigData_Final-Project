@@ -9,7 +9,10 @@ require("../MongoDB/exportDB");
 
 //var connection = new bigml.BigML('LIORATIYA','4084760438bee80f1b62c41d3ffaeeb7f3eb7751')
 var connection = new bigml.BigML('OFIRRR999','bce5e228c27e09db2e07949f5943d097f110c368')
-const bigML = {
+
+var model_info;
+
+const BigML = {
   createModel: async function () {
     source.create('callDetails.csv', function(error, sourceInfo) {
         if (!error && sourceInfo) {
@@ -19,19 +22,33 @@ const bigML = {
                     var model = new bigml.Model(connection);
                     model.create(datasetInfo, function (error, modelInfo) {
                       if (!error && modelInfo) {
-                        fs.writeFile("model.txt",modelInfo.object.resource,(err)=>{
-                            if(err) return console.log(err);
-                            console.log("File created!");
-                        })
-                    }
+                        // fs.writeFile("model.txt",modelInfo.object.resource,(err)=>{
+                        //     if(err) return console.log(err);
+                        //     console.log("Model created!");
+                        // })
+                        model_info = modelInfo;
+                        console.log("Model created!");
+                      }
                     });
                 }
             });
         }
     });
+  },
+  predict: async function (data) {
+    let prediction = new bigml.Prediction();
+    let result;
+    await prediction.create(model_info, data,function (err, pre) {
+    });
+    let localModel = new bigml.LocalModel(prediction.resource);
+    await localModel.predict(data,function (err, prediction) {
+        result = prediction.prediction;
+    });
+    return result;
   }
 }
 
+module.exports = BigML
 
 // var source = new bigml.Source(connection);
 // source.create('callDetails.csv', function(error, sourceInfo) {

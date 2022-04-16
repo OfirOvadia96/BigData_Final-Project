@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const BigML = require('../models/bigML/bml');
 
 // var newcall;
 
@@ -7,6 +8,15 @@ const router = express.Router();
 // kafka.consumer.on("data", (msg) => {
 //     newcall = msg.value;
 // });
+
+//------------ Socket.io ----------------
+io.on("connection", (socket) => {
+    socket.on('train', async () => {  await BigML.createModel();});
+    socket.on('predict', async () => 
+    {var prediction = BigML.predict({"id": "4591928","firstName": "Joy","lastName": "Goodwin","phone": "(555)","city": "Ashkelon","gender": "Female","age": 23,"prevCalls": 10,"totalTime": 50.946})
+    socket.emit("prediction", prediction);
+    });
+});
 
 //---------------------------------------------
 
