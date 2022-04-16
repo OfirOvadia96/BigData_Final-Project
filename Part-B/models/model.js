@@ -1,9 +1,8 @@
 const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
-const Redis = require('redis')
+const redisClient = require("./init_redis")
 
-const redisClient = Redis.createClient()
 const DEFAULT_EXPIRANTION = 30 // 30 sex
 
 // const todayEnd = new Date().setHours(23, 59, 59, 999);
@@ -13,6 +12,7 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
+
 // getting all the photos
 app.get("/photos", async (req, res) => {
   const albumId = req.query.albumId
@@ -21,8 +21,7 @@ app.get("/photos", async (req, res) => {
     { params: { albumId }}
   )
   
-  await redisClient.connect();
-  redisClient.set('example', "changed");
+  redisClient.set('example', "example_changed");
   // redisClient.setex('photos', DEFAULT_EXPIRANTION, JSON.stringify(data))
 
   res.json(data)
@@ -33,6 +32,8 @@ app.get("/photos/:id", async (req, res) => {
   const { data } = await axios.get( 
     `https://jsonplaceholder.typicode.com/photos/${req.params.id}`
   )
+
+  redisClient.set('specific', "specific_changed");
 
   res.json(data)
 })
