@@ -34,7 +34,18 @@ app.get("/photos/:id", async (req, res) => {
       'title': data.title,
       'url': data.url,
       'thumbnailUrl': data.thumbnailUrl
+    
+      // verifies that the data has been successfully stored
+     }, (err, reply) => {
+       if (err) throw err
+       console.log(reply)  
      });         
+
+     // logs the data ths's been stored
+     redisClient.hgetall(keyID, (err, reply) => {
+        if (err) throw err;
+        console.log(reply);
+    })
 
   // sets an expiration date for the data 
   redisClient.expireat(keyID, parseInt(todayEnd/1000));
