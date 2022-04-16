@@ -28,6 +28,7 @@ app.get("/photos/:id", async (req, res) => {
 
     const keyID = req.params.id
 
+    // stores the data in the database
     redisClient.hmset(keyID, {
       'albumId': data.albumId,
       'id': data.id,
@@ -53,5 +54,7 @@ app.get("/photos/:id", async (req, res) => {
   res.json(data)
 })
 
-const myPort = process.env.PORT || 3005; // can set PORT to be other num (By the command: set PORT=number)
+const myPort = process.env.PORT || 3006; // can set PORT to be other num (By the command: set PORT=number)
 app.listen(myPort, () => console.log(`Listening on http://localhost:${myPort}`));
+
+// module.exports = redisClient
