@@ -1,8 +1,8 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
-const createClient = require("redis").createClient;
 var bodyParser = require('body-parser')
-const kafka = require('../kafka/ConsumeFromKafka/consume');
+const redisClient = require("./models/init_redis")
+// const kafka = require('../kafka/ConsumeFromKafka/consume');
 
 const controllerRouter = require('./routes/controller');
 const {
@@ -27,7 +27,13 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.get('/', function (req, res) {
-    res.redirect("/pages/dashboard.html")
+    res.render(__dirname + '/views/dashboard/pages/dashboard', {
+        albumId: albumId,
+        id: id,
+        title: title,
+        url: url,
+        thumbnailUrl: thumbnailUrl
+    });
 })
 // where style files will be
 app.use('/', express.static('./views/dashboard'))
@@ -35,51 +41,62 @@ app.use('/', express.static('./views/dashboard'))
 
 
 //------------Consumer from Kafka-----------------
-kafka.consumer.on("data", (msg) => {
-    let massage = JSON.parse(msg.value);
-    console.log(massage);
-});
+// kafka.consumer.on("data", (msg) => {
+//     let massage = JSON.parse(msg.value);
+//     console.log(massage);
+// });
+//------------------------------------------------
 
 // app.use('/', controllerRouter);
 
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + '/insertData.html');
+// app.get("/", (req, res) => {
+
+// })
+
+//------------Consumer from Redis-----------------
+var data, albumId, id, title, url, thumbnailUrl, start, end, result
+
+const keyID = 1
+
+// fetches the data from the Redis database
+redisClient.hgetall(keyID, (err, reply) => {
+    if (err) throw err;
+    data = JSON.stringify(reply);
+    console.log('data:' + data);
+    parsesDataToVariables(data)
 })
 
-// app.post("/", async (req, res) => {
+// parses the data into variables 
+function parsesDataToVariables(data) {
+    start = data.indexOf("albumId");
+    end = data.indexOf("id");
+    result = data.substring(start + 8, end);
+    albumId = result
 
-//     const name = req.body.fname;
+    start = end;
+    end = data.indexOf("title");
+    result = data.substring(start + 3, end);
+    id = result
 
-//     (async () => {
-//         const client = createClient();
+    start = end;
+    end = data.indexOf("url");
+    result = data.substring(start + 7, end);
+    title = result
 
-//         client.on('error', (err) => console.log('Redis Client Error', err));
+    start = end;
+    end = data.indexOf("thumbnailUrl");
+    result = data.substring(start + 4, end);
+    url = result
 
-//         await client.connect();
+    start = end;
+    end = data.length;
+    result = data.substring(start + 13, end);
+    thumbnailUrl =result
+}
+//------------------------------------------------
 
-        //    await client.HSET('user2', {
-        //         'date': '25.01.22',
-        //         'time': '09:45',
-        //         'firstName': 'Dan',
-        //         'lastName': 'Biton',
-        //         'City': 'TLV',
-        //         'gender': 'male',
-        //         'age': '42',
-        //         'prevCalls': '10',
-        //         'topic': 'complain'
-        //     });
-
-//         const obj = await client.HGETALL('user2');
-//         console.log("user2: " + JSON.stringify(obj));
-
-//         const keys = await client.keys('*');
-//         console.log("keys: " + JSON.stringify(keys));
-
-//     })();
-
-//     res.send(name)
+// app.get('/', function(req, res) {
 // });
-
 
 const myPort = process.env.PORT || 2000; // can set PORT to be other num (By the command: set PORT=number)
 
