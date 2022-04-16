@@ -57,17 +57,17 @@ app.get("/", (req, res) => {
 
 //         await client.connect();
 
-//            await client.HSET('user2', {
-//                 'date': '25.01.22',
-//                 'time': '09:45',
-//                 'firstName': 'Dan',
-//                 'lastName': 'Biton',
-//                 'City': 'TLV',
-//                 'gender': 'male',
-//                 'age': '42',
-//                 'prevCalls': '10',
-//                 'topic': 'complain'
-//             });
+        //    await client.HSET('user2', {
+        //         'date': '25.01.22',
+        //         'time': '09:45',
+        //         'firstName': 'Dan',
+        //         'lastName': 'Biton',
+        //         'City': 'TLV',
+        //         'gender': 'male',
+        //         'age': '42',
+        //         'prevCalls': '10',
+        //         'topic': 'complain'
+        //     });
 
 //         const obj = await client.HGETALL('user2');
 //         console.log("user2: " + JSON.stringify(obj));
