@@ -71,6 +71,19 @@
             cProduct.innerHTML = "<select><option value='internet'>אינטרנט ביתי</option><option value='cables'>כבלים</option><option value='cellular'>סלולרי</option><option value='all'>כולם</option></select>";
             cTopic.innerHTML = "<select><option value='join'>הצטרפות</option><option value='service'>שירות</option><option value='complaint'>תלונה</option><option value='leave'>בקשת ניתוק</option></select>";
             cEnd.innerHTML = "<button onclick='reportEndCall(this.parentNode.parentNode)'>סיום</button>";
+            
+            var message = {};
+            message.id = person.id;
+            message.firstName = person.first_name;
+            message.lastName = person.last_namenm;
+            message.phone = person.phone;
+            message.city = person.city;
+            message.gender = person.gender;
+            message.age = person.age;
+            message.prevCalls = 10;
+            
+            //Send to socket the call details
+            socket.emit("callDetails", message);
         }
 
         function reportEndCall(row, person) {

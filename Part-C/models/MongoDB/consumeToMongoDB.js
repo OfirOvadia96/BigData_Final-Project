@@ -1,5 +1,5 @@
 const kafka = require('../../../kafka/ConsumeFromKafka/consume');
-const callDetails = require('./createTable');
+const callDetails = require('./schemaTable');
 
 //------------Consumer from Kafka-----------------
 kafka.consumer.on("data", (msg) => {
