@@ -1,5 +1,8 @@
 const express = require('express');
+// const app = express();
 const router = express.Router();
+var server = require('http').createServer(router);
+const io = require("socket.io")(server);
 const BigML = require('../models/bigML/bml');
 
 // var newcall;
@@ -11,8 +14,12 @@ const BigML = require('../models/bigML/bml');
 
 //------------ Socket.io ----------------
 io.on("connection", (socket) => {
-    socket.on('train', async () => {  await BigML.createModel();});
-    socket.on('predict', async () => 
+    socket.on('Train', (msg) => { 
+        // BigML.createModel(); 
+        console.log(msg);
+    });
+
+    socket.on('Predict', async (msg) => 
     {var prediction = BigML.predict({"id": "4591928","firstName": "Joy","lastName": "Goodwin","phone": "(555)","city": "Ashkelon","gender": "Female","age": 23,"prevCalls": 10,"totalTime": 50.946})
     socket.emit("prediction", prediction);
     });

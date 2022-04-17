@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,33 +14,95 @@
           //socket is global
           socket = io.connect();
           alert("connected");
+
+          // socket.on('prediction', function (msg) {
+          //   alert(msg);
+          // });
       }
 
-      socket.on('prediction', function (msg) {
-        alert(msg);
-      });
+      function train() {
+        socket.emit('Train', "msg");
+      }
+  
+      function predict(value) {
+        socket.emit('Predict', value);
+      }
 
     </script>
+  
 </head>
 <body onload="initSocket()">
-    <img src="./public/bigml.png" alt="bigml">
-    <br>
-    <h1>Predicting the topic of conversation</h1>
-    <br>
-<br>
-<br>
-<br>
+  <img src="./public/bigml.png" alt="bigml">
+  <br>
+  <h1>Predicting the topic of conversation</h1>
+  <br>
 
-<button onclick="train()">Create new model</button>
-<button onclick="predict()">Predict</button>
-<script>
-    function train() {
-      socket.emit('train', "msg");
-    }
+  <button onclick="train()">Create new model</button>
+  <button onclick="predict()">Predict</button>
 
-    function predict(value) {
-      socket.emit('predict', value);
-    }
-</script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/Part-A/views/calls.js"></script>
+    <title>BigML</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script type='text/javascript'>
+
+        //socket is global
+        const socket = io.connect();
+        alert("connected");
+
+        function initSocket() {
+
+            socket.on('Model', function (msg) { 
+                alert(msg);
+            });
+
+        }
+
+        function train() {
+            socket.emit('Train', "msg");
+        }
+    
+        function predict(value) {
+            socket.emit('Predict', value);
+        }
+
+        // socket.on('Predict', async (msg) => 
+        // {var prediction = BigML.predict({"id": "4591928","firstName": "Joy","lastName": "Goodwin","phone": "(555)","city": "Ashkelon","gender": "Female","age": 23,"prevCalls": 10,"totalTime": 50.946})
+        // socket.emit("prediction", prediction);
+        // });
+        
+    </script>
+
+</head>
+<body>
+    <body onload="initSocket()">
+
+        <img src="./public/bigml.png" alt="bigml">
+        <br>
+        <h1>Predicting the topic of conversation</h1>
+        <br>
+        <h3 id="predict"></h3>
+        <button onclick="train()">Create new model</button>
+        <button onclick="predict()">Predict</button>
+
+        <script type='text/javascript'>
+
+            socket.on('Prediction', function (msg) { 
+                // alert(msg);
+                document.getElementById('predict').innerHTML = 'The topic is: ' + msg;
+            });
+
+        </script>
+    </body>
 </body>
 </html>
