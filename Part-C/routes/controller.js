@@ -1,42 +1,63 @@
-const express = require('express');
-// const app = express();
-const router = express.Router();
-var server = require('http').createServer(router);
-const io = require("socket.io")(server);
-const BigML = require('../models/bigML/bml');
+// const express = require('express');
+// const router = express.Router();
+// var server = require('http').createServer(router);
 
-// var newcall;
+// const io = require("socket.io")(server);
+// var fs = require("fs");
+// const BigML = require('../models/bigML/bml');
+// const kafka = require("../../kafka/ConsumeFromKafka/consume");
+// const callDetails = require('../models/MongoDB/schemaTable');
+
 
 // //------------Consumer from Kafka-----------------
-// kafka.consumer.on("data", (msg) => {
-//     newcall = msg.value;
+// var newcall = "Waiting for new call...";
+
+// io.on("connection", (socket) => {
+//     kafka.consumer.on("data", (msg) => {
+        
+//         if(String(msg.value).includes("topic")){ //Data for MongoDB
+
+//             const call = new callDetails(JSON.parse(msg.value));
+//             //Enter call details to DB
+//             call.save().then(() => console.log("Inserted to MongoDB"))
+//             .catch((err) => console.log(err));
+
+//         }else{ //Data for predict in BigML
+
+//             socket.emit("NewCall", String(msg.value));
+//             newcall = msg.value;
+            
+//         }
+
+//     });
 // });
 
-//------------ Socket.io ----------------
-io.on("connection", (socket) => {
-    socket.on('Train', (msg) => { 
-        // BigML.createModel(); 
-        console.log(msg);
-    });
+// //---------------------------------------------
 
-    socket.on('Predict', async (msg) => 
-    {var prediction = BigML.predict({"id": "4591928","firstName": "Joy","lastName": "Goodwin","phone": "(555)","city": "Ashkelon","gender": "Female","age": 23,"prevCalls": 10,"totalTime": 50.946})
-    socket.emit("prediction", prediction);
-    });
-});
+// router.get('/', (req, res) => {
+//     res.render('index', {data: newcall})
+// })
 
-//---------------------------------------------
+// //-------- Socket.io ----------------
+// io.on("connection", (socket) => {
 
-router.get('/', (req,res) => { //(URL || Path , Call back function)
-   // res.send('Our Website Part A');
-    res.render('index',{data: "newcall"});
-});
+//     socket.on("Train", (msg) => {  
+//         var res = BigML.createModel();
+//         setTimeout(function(){
+//             socket.emit("Model", res);
+//         }, 10000);
+//     });
 
-/*
-    app.get();
-    app.post();
-    app.put();
-    app.delete();
-*/
+//     socket.on('Predict', (msg) => 
+//         {BigML.predict(newcall);
+//         setTimeout(function(){
+//             fs.readFile('predict.txt', 'utf8', function(err, data){
+//                 socket.emit("Prediction", data);
+//             });
+//         }, 3000);
+//     });
 
-module.exports = router;
+// });
+
+
+// module.exports = router;

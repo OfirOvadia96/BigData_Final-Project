@@ -5,7 +5,7 @@ const io = require("socket.io")(server);
 var db = require('./mysql');
 const kafka = require("../kafka/PublishToKafka/publish")
 
-const port = 3020
+const port = 3022
 
 const bodyParser = require('body-parser');
 

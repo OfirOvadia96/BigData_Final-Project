@@ -17,6 +17,7 @@
     "express": "^4.17.3",
     "express-ejs-layouts": "^2.5.1",
     "faker": "^6.6.6",
+    "json2csv": "^5.0.7",
     "librdkafka": "^0.0.0",
     "mongoose": "^6.3.0",
     "mysql": "^2.18.1",

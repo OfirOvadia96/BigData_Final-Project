@@ -1,4 +1,4 @@
-require("./mongoConnect"); //Connect to MongoDB Compass
+const connect = require("./connect"); //Connect to MongoDB Compass
 const mongoose = require('mongoose');
 
 const callDetailsSchema = new mongoose.Schema({
