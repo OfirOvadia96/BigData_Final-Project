@@ -16,7 +16,6 @@ const MongoDB = {
             fs.writeFile("callDetails.csv", csvData, function(error) {
                 if (error) throw error;
                 console.log("Write to callDetails.csv successfully!");
-                mongoose.connection.close();
             });
         });
     }

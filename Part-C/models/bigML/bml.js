@@ -7,39 +7,40 @@ var bigml = require('bigml');
 var fs = require("fs");
 var mongodb = require("../MongoDB/exportDB");
 
-// var connection = new bigml.BigML('LIORATIYA','32c48e9131baa4930cb24d5f094a0e6b12d7de01')
-var connection = new bigml.BigML('OFIRRR999','bce5e228c27e09db2e07949f5943d097f110c368')
+var connection = new bigml.BigML('LIORATIYA','32c48e9131baa4930cb24d5f094a0e6b12d7de01')
+// var connection = new bigml.BigML('OFIRRR999','bce5e228c27e09db2e07949f5943d097f110c368')
 
 // var model_info;
 
+var source = new bigml.Source(connection);
+
 const BigML = {
   createModel: function () {
-    // mongodb.export2csv;
-    setTimeout(function(){
-      var source = new bigml.Source(connection);
+    mongodb.export2csv();
     
-      source.create('./iris.csv', function(error, sourceInfo) {
+    // setTimeout(function(){
+      source.create('callDetails.csv', function(error, sourceInfo) {
           if (!error && sourceInfo) {
-      //         const dataset = new bigml.Dataset(connection);
-      //         dataset.create(sourceInfo, function(error, datasetInfo) {
-      //             if (!error && datasetInfo) {
-      //                 var model = new bigml.Model(connection);
-      //                 model.create(datasetInfo, function (error, modelInfo) {
-      //                   if (!error && modelInfo) {
+              const dataset = new bigml.Dataset(connection);
+              dataset.create(sourceInfo, function(error, datasetInfo) {
+                  if (!error && datasetInfo) {
+                      var model = new bigml.Model(connection);
+                      model.create(datasetInfo, function (error, modelInfo) {
+                        if (!error && modelInfo) {
   
-      //                     fs.writeFile("model.txt",modelInfo.object.resource,(err)=>{
-      //                       if(err) return console.log(err);
-      //                       console.log("Model created!");
-      //                     })
-      //                   }
-      //                 });
-      //             }
-      //         });
+                          fs.writeFile("model.txt",modelInfo.object.resource,(err)=>{
+                            if(err) return console.log(err);
+                            console.log("Model created!");
+                          })
+                        }
+                      });
+                  }
+              });
           }else{
             console.log(error);
           }
       })
-  }, 5000);
+    // }, 3000);
 
     return "Model created!";
   },
