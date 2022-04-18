@@ -85,13 +85,17 @@
         <br>
         <h1>Predicting the topic of conversation</h1>
         <br>
-        <h3><%-data%></h3>
+        <h3 id="call"></h3>
         <br>
         <h3 id="predict"></h3>
         <button onclick="train()">Create new model</button>
         <button onclick="predict()">Predict</button>
 
         <script type='text/javascript'>
+
+            socket.on('NewCall', function (msg) { 
+                document.getElementById('call').innerHTML = 'Current call: ' + msg;
+            });
 
             socket.on('Prediction', function (msg) { 
                 document.getElementById('predict').innerHTML = 'The topic is: ' + msg;
