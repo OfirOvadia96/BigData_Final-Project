@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
 const io = require("socket.io")(server);
-var db = require('./mysql');
+var db = require('./models/mysql');
 const kafka = require("../kafka/PublishToKafka/publish")
 
 const port = 3022

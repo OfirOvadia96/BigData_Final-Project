@@ -59,6 +59,7 @@
             const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(date)
 
             var person = randomPerson();
+            var randomPrevCalls = Math.floor(Math.random() * 50) + 1;
             cID.innerHTML = `<div id=${person.id}>${person.id}</div>`;
             cFirstName.innerHTML = `<div id=${person.first_name}>${person.first_name}</div>`;
             cLastName.innerHTML = `<div id=${person.last_name}>${person.last_name}</div>`;
@@ -66,7 +67,7 @@
             cCity.innerHTML = `<div id=${person.city}>${person.city}</div>`;
             cGender.innerHTML = `<div id=${person.gender}>${person.gender}</div>`;
             cAge.innerHTML = `<div id=${person.age}>${person.age}</div>`;
-            cPrevCalls.innerHTML = `<input type="number" "min="10" max="100">`;
+            cPrevCalls.innerHTML = `<div id=${randomPrevCalls}>${randomPrevCalls}</div>`;;
             cStart.innerHTML = "<div id='" + date + "''>" + `${day}-${month}-${year} ,${hour}:${minute}` + "</div>";
             cProduct.innerHTML = "<select><option value='internet'>אינטרנט ביתי</option><option value='cables'>כבלים</option><option value='cellular'>סלולרי</option><option value='all'>כולם</option></select>";
             cTopic.innerHTML = "<select><option value='join'>הצטרפות</option><option value='service'>שירות</option><option value='complaint'>תלונה</option><option value='leave'>בקשת ניתוק</option></select>";
@@ -80,9 +81,9 @@
             message.city = person.city;
             message.gender = person.gender;
             message.age = person.age;
-            message.prevCalls = 10;
+            message.prevCalls = randomPrevCalls;
             
-            //Send to socket the call details
+            //Send to socket the call details without topic (to predict in BigML)
             socket.emit("callDetails", message);
         }
 
@@ -101,7 +102,7 @@
             message.city = row.cells[4].getElementsByTagName('div')[0].id;
             message.gender = row.cells[5].getElementsByTagName('div')[0].id;
             message.age = row.cells[6].getElementsByTagName('div')[0].id;
-            message.prevCalls = row.cells[7].getElementsByTagName('input')[0].value;
+            message.prevCalls = row.cells[7].getElementsByTagName('div')[0].id;
             var startcall = row.cells[8].getElementsByTagName('div')[0].id;
             message.totalTime = (parseInt(Date.now()) - parseInt(startcall)) / 1000; // seconds
             message.product = (row.cells[9].getElementsByTagName('select')[0].value);

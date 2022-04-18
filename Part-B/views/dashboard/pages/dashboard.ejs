@@ -1191,6 +1191,14 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+  <script>
+        
+        //Recive new call from kafka comsume
+        socket.on('newdata', function (msg) { 
+              document.getElementById('call').innerHTML = 'Current call: ' + msg;
+        });
+
+  </script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>

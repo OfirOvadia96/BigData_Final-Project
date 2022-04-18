@@ -6,13 +6,11 @@ const socketIO = require('socket.io');
 const io = socketIO(server);
 // const kafka = require('../kafka/ConsumeFromKafka/consume');
 
-const controllerRouter = require('./routes/controller');
-const {
-    string
-} = require('joi');
-const send = require('send');
-
-const DEFAULT_EXPIRANTION = 3600; // one hour
+// const controllerRouter = require('./routes/controller');
+// const {
+//     string
+// } = require('joi');
+// const send = require('send');
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -30,12 +28,11 @@ io.on('connection', (socket) => {
     //Consumer from Kafka
     kafka.consumer.on("data", (msg) => {
 
-      socket.on('newdata', (msg) => {
-        console.log(msg);
-        io.emit('newdata', msg);
-      });
-        // let massage = JSON.parse(msg.value);
-        // console.log(massage);
+        //**Store the data in Redis and after send to Dashboard */
+
+        //To frontend
+        io.emit('newdata', String(msg.value));
+
 
     });
 });
