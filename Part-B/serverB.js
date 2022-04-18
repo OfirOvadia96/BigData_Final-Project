@@ -2,6 +2,8 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser')
 const redisClient = require("./models/init_redis")
+const socketIO = require('socket.io');
+const io = socketIO(server);
 // const kafka = require('../kafka/ConsumeFromKafka/consume');
 
 const controllerRouter = require('./routes/controller');
@@ -23,6 +25,23 @@ app.set('view engine', 'ejs')
 //where front files will be
 app.set('views', __dirname + '/views');
 
+//----------Socket.io -------------------
+io.on('connection', (socket) => {  
+    //Consumer from Kafka
+    kafka.consumer.on("data", (msg) => {
+
+      socket.on('newdata', (msg) => {
+        console.log(msg);
+        io.emit('newdata', msg);
+      });
+        // let massage = JSON.parse(msg.value);
+        // console.log(massage);
+
+    });
+});
+
+//----------------------------------------------
+
 //where layouts files will be
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
@@ -38,13 +57,6 @@ app.get('/', function (req, res) {
 // where style files will be
 app.use('/', express.static('./views/dashboard'))
 
-
-
-//------------Consumer from Kafka-----------------
-// kafka.consumer.on("data", (msg) => {
-//     let massage = JSON.parse(msg.value);
-//     console.log(massage);
-// });
 //------------------------------------------------
 
 // app.use('/', controllerRouter);
@@ -58,13 +70,13 @@ var data, albumId, id, title, url, thumbnailUrl, start, end, result
 
 const keyID = 1
 
-// fetches the data from the Redis database
-redisClient.hgetall(keyID, (err, reply) => {
-    if (err) throw err;
-    data = JSON.stringify(reply);
-    console.log('data:' + data);
-    parsesDataToVariables(data)
-})
+// // fetches the data from the Redis database
+// redisClient.hgetall(keyID, (err, reply) => {
+//     if (err) throw err;
+//     data = JSON.stringify(reply);
+//     console.log('data:' + data);
+//     parsesDataToVariables(data)
+// })
 
 // parses the data into variables 
 function parsesDataToVariables(data) {
