@@ -255,6 +255,11 @@ tbody tr:hover {
 .column11 {
   width: 160px;
   text-align: left;
+}
+
+.column12 {
+  width: 160px;
+  text-align: left;
   padding-right: 40px;
 }
 
