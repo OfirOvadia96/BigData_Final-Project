@@ -47,4 +47,6 @@ initDatabase();
 
 module.exports.setAsync = promisify(client.set).bind(client);
 module.exports.getAsync = promisify(client.get).bind(client);
+module.exports.initDatabase = initDatabase;
+
 

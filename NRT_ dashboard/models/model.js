@@ -4,7 +4,8 @@ const cors = require('cors')
 const {
   client,
   getAsync,
-  setAsync
+  setAsync,
+  initDatabase
 } = require("./init_redis")
 
 const app = express()
@@ -16,6 +17,12 @@ app.use(cors())
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
 //-----------functions-------------
+
+function setExpiresTime(key) {
+  // sets an expiration date for the data 
+  client.expireat(key, parseInt(todayEnd / 1000));
+}
+
 async function incrementByOne(key) {
   try {
     // gets the data
@@ -25,10 +32,14 @@ async function incrementByOne(key) {
     // increments and stores the updated data in the database
     await setAsync(key, ++value);
     console.log("update num: " + value);
+    // // sets an expiration date for the data 
+    // setExpiresTime(key);   
+
   } catch (error) {
     console.log(error);
   }
 }
+
 //---------------------------------
 
 app.get("/", async (req, res) => {
@@ -64,6 +75,8 @@ app.get("/", async (req, res) => {
         console.log(input + " is not recognized by thes switch case");
     }
   }
+
+  initDatabase();
 
 })
 
@@ -121,7 +134,5 @@ app.get("/photos/:id", async (req, res) => {
   // res.json(data)
 })
 
-const myPort = process.env.PORT || 3009; // can set PORT to be other num (By the command: set PORT=number)
+const myPort = process.env.PORT || 3011; // can set PORT to be other num (By the command: set PORT=number)
 app.listen(myPort, () => console.log(`Listening on http://localhost:${myPort}`));
-
-// module.exports = client
