@@ -48,7 +48,8 @@
         <script type='text/javascript'>
 
             socket.on('NewCall', function (msg) { 
-                document.getElementById('call').innerHTML = 'Current call: ' + msg;
+                document.getElementById('call').innerHTML = 
+                'Current call: First Name: ' + msg.firstname + ' | Last Name: ' + msg.lastname + ' | Phone: '+ msg.phone +' | City: '+ ' | Last Name: '+ ' | Last Name: ';
             });
 
             socket.on('Prediction', function (msg) { 

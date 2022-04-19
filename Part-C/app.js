@@ -8,11 +8,12 @@ const kafka = require("../kafka/ConsumeFromKafka/consume");
 const mongodb = require('./models/MongoDB/mongodb');
 
 const port = 3245
-
+//http://localhost:3245
 //--------------Middleware------------------
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
+app.use(express.json());
 
 //------------Consumer from Kafka-----------------
 
@@ -27,7 +28,9 @@ io.on("connection", (socket) => {
 
         }else{ //Data for predict in BigML
 
-            socket.emit("NewCall", String(msg.value));
+            const newCall = JSON.parse(msg.value);
+            socket.emit("NewCall", 
+            {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
             newcall = msg.value;
             
         }

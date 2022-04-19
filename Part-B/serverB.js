@@ -27,12 +27,13 @@ app.set('views', __dirname + '/views');
 io.on('connection', (socket) => {  
     //Consumer from Kafka
     kafka.consumer.on("data", (msg) => {
+        const newCall = JSON.parse(msg.value);
 
         //**Store the data in Redis and after send to Dashboard */
 
         //To frontend
-        io.emit('newdata', String(msg.value));
-
+        io.emit('newdata', newCall);
+        
 
     });
 });
