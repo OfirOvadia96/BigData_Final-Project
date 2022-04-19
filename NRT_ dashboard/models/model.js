@@ -40,13 +40,34 @@ async function incrementByOne(key) {
   }
 }
 
+async function decrementByOne(key) {
+  try {
+    // gets the data
+    let value = await getAsync(key);
+    console.log("current num: " + value);
+
+    // increments and stores the updated data in the database
+    if (value > 0) {
+      await setAsync(key, --value);
+    } else {
+      console.log("value can not be negative");
+    }
+    console.log("update num: " + value);
+    // // sets an expiration date for the data 
+    // setExpiresTime(key);   
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //---------------------------------
 
 app.get("/", async (req, res) => {
 
   for (let i = 0; i < 20; i++) {
     let input;
-    if (i % 4 == 0) input = 'waiting'
+    if (i % 4 == 0) input = 'addWaiting'
     else if (i % 3 == 1) input = 'join'
     else if (i % 2 == 1) input = 'complain'
     else input = 'ditch'
@@ -55,8 +76,12 @@ app.get("/", async (req, res) => {
 
     switch (input) {
 
-      case 'waiting':
+      case 'addWaiting':
         await incrementByOne('waiting');
+        break;
+
+      case 'removeWaiting':
+        await decrementByOne('waiting');
         break;
 
       case 'join':
@@ -75,8 +100,6 @@ app.get("/", async (req, res) => {
         console.log(input + " is not recognized by thes switch case");
     }
   }
-
-  initDatabase();
 
 })
 
