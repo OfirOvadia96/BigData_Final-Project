@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Calls Table</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<h1>Calls Screen</h1>
+
+	<!-- why body tag appears twice? -->
+	<body onload="initSocket()">
+		<div type="number" id="total" min="0" max="200" value="0">Total Waiting calls: <h1 class="counter"></h1>
+		</div>
+		<input type="button" value="Set" onclick="sendMessage(total.value)" />
+		&nbsp;
+		<select>
+			<option value='Emergency'>Holidays</option>
+			<option>Summer Vacations</option>
+			<option>Ordinary Days</option>
+		</select>
+		<hr>
+		<input type="button" onclick="NewCall()" value="New Call" />
+
+		<div class="limiter">
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">ID</th>
+									<th class="column2">First Name</th>
+									<th class="column3">Last Name</th>
+									<th class="column4">Phone</th>
+									<th class="column5">City</th>
+									<th class="column6">Gender</th>
+									<th class="column7">Age</th>
+									<th class="column8">Prev. calls</th>
+									<th class="column9">Start Time</th>
+									<th class="column10">Product</th>
+									<th class="column11">Topic</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+								<tr>
+									<th class="column1">316749586</th>
+									<th class="column2">Avi</th>
+									<th class="column3">Nimni</th>
+									<th class="column4">052-5744624</th>
+									<th class="column5">Tel-Aviv</th>
+									<th class="column6">Male</th>
+									<th class="column7">42</th>
+									<th class="column8">8</th>
+									<th class="column9">16:23</th>
+									<th class="column10">Internet</th>
+									<th class="column11">Issue</th>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+
+
+	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>
