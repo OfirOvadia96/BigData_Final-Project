@@ -7,10 +7,6 @@ const io = socketIO(server);
 // const kafka = require('../kafka/ConsumeFromKafka/consume');
 
 // const controllerRouter = require('./routes/controller');
-// const {
-//     string
-// } = require('joi');
-// const send = require('send');
 
 const app = express();
 app.use(bodyParser.urlencoded({
