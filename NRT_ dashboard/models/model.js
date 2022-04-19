@@ -1,7 +1,11 @@
 const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
-const {client, getAsync, setAsync} = require("./init_redis")
+const {
+  client,
+  getAsync,
+  setAsync
+} = require("./init_redis")
 
 const app = express()
 app.use(express.urlencoded({
@@ -12,18 +16,15 @@ app.use(cors())
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
 //-----------functions-------------
-
 async function incrementByOne(key) {
   try {
     // gets the data
-    let value = await getAsync('waiting');
+    let value = await getAsync(key);
     console.log("current num: " + value);
 
     // increments and stores the updated data in the database
-    await client.set(key, ++value, function (err, reply) {
-      console.log(reply); // OK
-      console.log("updated num: " + value);
-    });
+    await setAsync(key, ++value);
+    console.log("update num: " + value);
   } catch (error) {
     console.log(error);
   }
@@ -32,30 +33,31 @@ async function incrementByOne(key) {
 
 app.get("/", async (req, res) => {
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 20; i++) {
     let input;
-    // if (i % 4 == 0) input = 'waiting'
-    // else if (i % 3 == 1) input = 'join'
-    // else if (i % 2 == 1) input = 'complain'
-    // else input = 'ditch'
-    input = 'waiting'
+    if (i % 4 == 0) input = 'waiting'
+    else if (i % 3 == 1) input = 'join'
+    else if (i % 2 == 1) input = 'complain'
+    else input = 'ditch'
+
+    // console.log(input);
 
     switch (input) {
 
       case 'waiting':
-        incrementByOne('waiting');
+        await incrementByOne('waiting');
         break;
 
       case 'join':
-        incrementByOne('join');
+        await incrementByOne('join');
         break;
 
       case 'complain':
-        incrementByOne('complain');
+        await incrementByOne('complain');
         break;
 
       case 'ditch':
-        incrementByOne('ditch');
+        await incrementByOne('ditch');
         break;
 
       default:
@@ -119,7 +121,7 @@ app.get("/photos/:id", async (req, res) => {
   // res.json(data)
 })
 
-const myPort = process.env.PORT || 3007; // can set PORT to be other num (By the command: set PORT=number)
+const myPort = process.env.PORT || 3009; // can set PORT to be other num (By the command: set PORT=number)
 app.listen(myPort, () => console.log(`Listening on http://localhost:${myPort}`));
 
 // module.exports = client
