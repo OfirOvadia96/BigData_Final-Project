@@ -26,27 +26,27 @@ process.on('SIGINT', () => {
 })
 
 
-//------------------sets database------------------ 
+//------------------sets-database------------------ 
+
+const initDatabase = async () => {
+    const setAsync = promisify(client.set).bind(client);
+    const getAsync = promisify(client.get).bind(client);
+
+    await setAsync('waiting', 0);
+
+    await setAsync('join', 0);
+
+    await setAsync('complain', 0);
+
+    await setAsync('ditch', 0);
+};
+
+initDatabase();
+
+//------------------exports-functions------------------ 
 
 module.exports.setAsync = promisify(client.set).bind(client);
 module.exports.getAsync = promisify(client.get).bind(client);
+module.exports.initDatabase = initDatabase;
 
-// const initDatabase = async () => {
 
-//     const setAsync = promisify(client.set).bind(client);
-//     const getAsync = promisify(client.get).bind(client);
-
-//     await setAsync('waiting', 0);
-
-//     await setAsync('join', 0);
-
-//     await setAsync('complain', 0);
-
-//     await setAsync('ditch', 0);
-
-// };
-
-// initDatabase();
-
-// This dosn't make sense
-module.exports.client = client
