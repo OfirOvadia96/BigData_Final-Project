@@ -18,7 +18,7 @@
 
         //Send to socket the current waiting calls
         function sendMessage(total) {
-            socket.emit("totalWaitingCalls", { totalWaiting: total });
+            socket.emit("totalWaitingCalls",total);
         }
 
         var countCalls = 0;
@@ -85,6 +85,9 @@
             
             //Send to socket the call details without topic (to predict in BigML)
             socket.emit("callDetails", message);
+            //Sent to socket the total waiting calls
+            socket.emit("totalWaitingCalls",countCalls);
+
         }
 
         function reportEndCall(row, person) {

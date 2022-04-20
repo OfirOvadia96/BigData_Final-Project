@@ -1,9 +1,6 @@
-// https://www.cloudkarafka.com/ הפעלת קפקא במסגרת ספק זה
-
-const uuid = require("uuid");
+// https://www.cloudkarafka.com/ 
 const Kafka = require("node-rdkafka");
 
-// // use you own parameters
 // const kafkaConf = {
 //   "group.id": "cloudkarafka-example",
 //   "metadata.broker.list": "tricycle-01.srvs.cloudkafka.com:9094,tricycle-02.srvs.cloudkafka.com:9094,tricycle-03.srvs.cloudkafka.com:9094".split(","),
@@ -14,9 +11,6 @@ const Kafka = require("node-rdkafka");
 //   "sasl.password": "VZhZOhNE7ItIQycfyTxj2iQ-rdApVl2W",
 //   "debug": "generic,broker,security"
 // };
-
-// const prefix = "r32sn9cb-";
-// const topic = `${prefix}new`;
 
 const kafkaConf = {
   "group.id": "cloudkarafka-example",
@@ -32,21 +26,35 @@ const kafkaConf = {
 const prefix = "z7nl7npe-";
 const topic = `${prefix}default`;
 
-const prefix2 = "z7nl7npe-";
-const topic2 = `${prefix2}new`;
-
-const producer = new Kafka.Producer(kafkaConf);
-
-const genMessage = m => new Buffer.alloc(m.length,m);
-
-producer.on("ready", function(arg) {
-  console.log(`producer ${arg.name} ready.`); 
+const topics = [topic];
+const consumer = new Kafka.KafkaConsumer(kafkaConf, {
+  "auto.offset.reset": "beginning"
 });
-producer.connect();
 
-module.exports.publish = function(msg)
-{   
-  m=JSON.stringify(msg);
-  producer.produce(topic, -1, genMessage(m), uuid.v4());   
-  producer.produce(topic2, -1, genMessage(m), uuid.v4());  
-}
+consumer.on("error", (err) => {
+  console.error(err);
+});
+
+consumer.on("ready", function(arg) {
+  console.log(`Consumer ${arg.name} ready - for Redis & Dashboard`);
+  consumer.subscribe(topics);
+  consumer.consume();
+});
+
+consumer.on("data", function(m) {
+ console.log(m.value.toString());
+});
+
+consumer.on("disconnected", (arg)=> {
+  process.exit();
+});
+consumer.on('event.error', (err)=> {
+  console.error(err);
+  process.exit(1);
+});
+consumer.on('event.log', function(log) {
+  console.log(log);
+});
+consumer.connect();
+
+module.exports.consumer = consumer;
