@@ -17,6 +17,71 @@
   box-sizing: border-box;
 }
 
+.model {
+  align-items: center;
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 15%;
+  
+}
+
+.predict{
+  font-size: 20px;
+  align-items: center;
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 15%;
+}
+
 body,
 html {
   height: 100%;
@@ -44,10 +109,11 @@ a:hover {
 h1 {
   font-family: Georgia, serif;
   color: #666666;
-  font-size: 50px;
+  font-size: 70px;
   line-height: 1em;
   margin: 0 0 0 60px;
   text-align: center;
+  
 }
 
 h2,
@@ -227,64 +293,54 @@ tbody tr:hover {
 .column1 {
   width: 160px;
   padding-left: 40px;
-  text-align: left;
+  text-align: center;
 }
 
 .column2 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column3 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column4 {
   width: 260px;
-  text-align: left;
+  text-align: center;
 }
 
 .column5 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column6 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column7 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column8 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column9 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
-.column10 {
-  width: 160px;
-  text-align: left;
-}
 
-.column11 {
+.column9-data {
   width: 160px;
-  text-align: left;
-  padding-right: 40px;
-}
-
-.column11-data {
-  width: 160px;
-  text-align: left;
-  background-color: yellow;
+  text-align: center;
+  background-color: rgb(239, 239, 81);
   padding-right: 40px;
 }
 

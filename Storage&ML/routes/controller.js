@@ -1,6 +1,15 @@
-// const express = require('express');
-// const router = express.Router();
-// var server = require('http').createServer(router);
+const express = require('express');
+const router = express.Router();
+module.exports = router;
+
+router.get('/', (req,res) => { //(URL || Path , Call back function)
+     res.render('Prediction_Table_Responsive/index');
+ });
+
+
+
+//***************  */ -----need to check if needed ------- ***************
+
 
 // const io = require("socket.io")(server);
 // var fs = require("fs");
