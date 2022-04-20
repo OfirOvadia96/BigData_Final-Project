@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
-const controllerRouter = require('./routes/controller'); //controller
+const controllerRouter = require('./routcontroller'); //controller
 const io = require("socket.io")(server, {
    allowEIO3: true // false by default
 });
 
 var fs = require("fs");
-const BigML = require('./models/bml');
+const BigML = require('./');
 //const kafka = require("../MessageBroker/ConsumeFromKafka/consume");
 const mongodb = require('./models/MongoDB/mongodb');
 

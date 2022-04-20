@@ -1,0 +1,16 @@
+body {
+    background-color: rgb(76, 240, 76);
+}
+h1{
+    color: white;
+    text-align: center;
+    font-size: 90px;
+}
+button{
+    text-align: center;
+}
+img{
+    border-radius: 50%;
+    width: 8%;
+  float:left
+} 
