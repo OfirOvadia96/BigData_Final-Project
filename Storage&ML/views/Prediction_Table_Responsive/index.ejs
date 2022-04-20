@@ -21,21 +21,73 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script type='text/javascript'>
+
+        //socket is global
+        const socket = io.connect();
+        
+        function initSocket() {
+
+            socket.on('Model', function (msg) { 
+				document.getElementById("column2").innerHTML = msg.firstname;
+				document.getElementById("column3").innerHTML = msg.lastname;
+				document.getElementById("column4").innerHTML = msg.phone;
+				document.getElementById("column5").innerHTML = msg.city;
+				document.getElementById("column6").innerHTML = msg.gender;
+				document.getElementById("column7").innerHTML = msg.age;
+				document.getElementById("column8").innerHTML = msg.prevcalls;
+                alert(msg);
+            });
+
+        }
+
+        function train() {
+            socket.emit('Train', "msg");
+        }
+    
+        function predict(value) {
+            socket.emit('Predict', value);
+        }
+
+        
+    </script>
+	<!--===============================================================================================-->
 </head>
 
 <body>
-
+	<img src="./images/bigml.png" alt="bigml">
 	<h1>Predicting the topic of conversation</h1>
 	<br>
 	<h3 id="call"></h3>
 	<br>
-	<h3 id="predict"></h3>
-	<button onclick="train()">Create new model</button>
-	<button onclick="predict()">Predict</button>
+	<!--===============================================================================================-->
+	<body onload="initSocket()">
+
+        <button class="model" onclick="train()">Create new model</button>
+        <button class="predict" onclick="predict()">Predict</button>
+
+        <script type='text/javascript'>
+
+            socket.on('NewCall', function (msg) {
+                document.getElementById('call').innerHTML = 
+                'Current call: First Name: ' + msg.firstname + ' | Last Name: ' + msg.lastname + ' | Phone: '+ msg.phone
+                + ' | City: ' + msg.city + ' | Gender: ' + msg.gender + ' | Age: '+ msg.age + ' | Previus calls: ' + msg.prevcalls;
+            });
+
+            socket.on('Prediction', function (msg) {
+				document.getElementById("column9").innerHTML = msg;
+            });
+
+        </script>
+    </body>
+	<!--===============================================================================================-->
+	
 
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
+
 				<div class="table100">
 					<table>
 						<thead>
@@ -47,25 +99,21 @@
 								<th class="column5">City</th>
 								<th class="column6">Gender</th>
 								<th class="column7">Age</th>
-								<th class="column8">Prev. calls</th>
-								<th class="column9">Start Time</th>
-								<th class="column10">Product</th>
-								<th class="column11">Topic</th>
+								<th class="column8">Prev calls</th>
+								<th class="column9">Topic</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<th class="column1">316749586</th>
-								<th class="column2">Avi</th>
-								<th class="column3">Nimni</th>
-								<th class="column4">052-5744624</th>
-								<th class="column5">Tel-Aviv</th>
-								<th class="column6">Male</th>
-								<th class="column7">42</th>
-								<th class="column8">8</th>
-								<th class="column9">16:23</th>
-								<th class="column10">Internet</th>
-								<th class="column11-data">Issue</th>
+								<th class="column1" id="column1">-</th>
+								<th class="column2" id="column2">-</th>
+								<th class="column3" id="column3">-</th>
+								<th class="column4" id="column4">-</th>
+								<th class="column5" id="column5">-</th>
+								<th class="column6" id="column6">-</th>
+								<th class="column7" id="column7">-</th>
+								<th class="column8" id="column8">-</th>
+								<th class="column9-data" id="column9">-</th>
 							</tr>
 
 						</tbody>
@@ -75,7 +123,7 @@
 		</div>
 	</div>
 
-
+	
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
