@@ -29,7 +29,7 @@
   cursor: pointer;
   display: inline-block;
   font-family: din-round,sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: .8px;
   line-height: 20px;
@@ -51,7 +51,7 @@
 }
 
 .predict{
-  font-size: 20px;
+  font-size: 15px;
   align-items: center;
   appearance: button;
   background-color: #1899D6;
@@ -153,10 +153,12 @@ input:focus {
 }
 
 /* ------------------------------------ */
+
 button {
   outline: none !important;
   border: none;
   background: transparent;
+  text-align: center;
 }
 
 button:hover {
