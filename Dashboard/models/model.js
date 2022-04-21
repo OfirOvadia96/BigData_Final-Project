@@ -1,12 +1,13 @@
 const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
-const {
-  client,
-  getAsync,
-  setAsync,
-  initDatabase
-} = require("./init_redis")
+
+// const {
+//   client,
+//   getAsync,
+//   setAsync,
+//   initDatabase
+// } = require("./init_redis")
 
 const app = express()
 app.use(express.urlencoded({
@@ -65,41 +66,41 @@ async function decrementByOne(key) {
 
 app.get("/", async (req, res) => {
 
-  for (let i = 0; i < 20; i++) {
-    let input;
-    if (i % 4 == 0) input = 'addWaiting'
-    else if (i % 3 == 1) input = 'join'
-    else if (i % 2 == 1) input = 'complain'
-    else input = 'ditch'
+  // for (let i = 0; i < 20; i++) {
+  //   let input;
+  //   if (i % 4 == 0) input = 'addWaiting'
+  //   else if (i % 3 == 1) input = 'join'
+  //   else if (i % 2 == 1) input = 'complain'
+  //   else input = 'ditch'
 
-    // console.log(input);
+  //   // console.log(input);
 
-    switch (input) {
+  //   switch (input) {
 
-      case 'addWaiting':
-        await incrementByOne('waiting');
-        break;
+  //     case 'addWaiting':
+  //       await incrementByOne('waiting');
+  //       break;
 
-      case 'removeWaiting':
-        await decrementByOne('waiting');
-        break;
+  //     case 'removeWaiting':
+  //       await decrementByOne('waiting');
+  //       break;
 
-      case 'join':
-        await incrementByOne('join');
-        break;
+  //     case 'join':
+  //       await incrementByOne('join');
+  //       break;
 
-      case 'complain':
-        await incrementByOne('complain');
-        break;
+  //     case 'complain':
+  //       await incrementByOne('complain');
+  //       break;
 
-      case 'ditch':
-        await incrementByOne('ditch');
-        break;
+  //     case 'ditch':
+  //       await incrementByOne('ditch');
+  //       break;
 
-      default:
-        console.log(input + " is not recognized by thes switch case");
-    }
-  }
+  //     default:
+  //       console.log(input + " is not recognized by thes switch case");
+  //   }
+  // }
 
 })
 
