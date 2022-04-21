@@ -53,15 +53,15 @@ app.use('/', controllerRouter);
 //-------- Socket.io ----------------
 io.on("connection", (socket) => {
 
-    socket.on("Train", (msg) => {  
-        var res = BigML.createModel();
+    socket.on("Train", async (msg) => {  
+        var res = await BigML.createModel();
         setTimeout(function(){
             socket.emit("Model", res);
         }, 10000);
     });
 
-    socket.on('Predict', (msg) => 
-        {BigML.predict(newcall);
+    socket.on('Predict', async (msg) => 
+        {await BigML.predict(newcall);
         setTimeout(function(){
             fs.readFile('predict.txt', 'utf8', function(err, data){
                 socket.emit("Prediction", data);

@@ -10,7 +10,7 @@ const MongoDB = {
         call.save().then(() => console.log("Inserted to MongoDB"))
         .catch((err) => console.log(err));
     },
-    export2csv: function () {
+    export2csv: async function () {
         Collection.find({},{_id:0}).lean().exec((err, data) => {
             if (err) throw err;
             const csvFields = ['id','firstName','lastName','phone','city', 'gender', 'age','prevCalls','totalTime','product','topic']

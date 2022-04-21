@@ -8,9 +8,9 @@ var connection = new bigml.BigML('LIORATIYA','32c48e9131baa4930cb24d5f094a0e6b12
 var source = new bigml.Source(connection);
 
 const BigML = {
-  createModel: function () {
-    mongodb.export2csv();
-    
+  createModel: async function () {
+    await mongodb.export2csv();
+    await sleep(250);
       source.create('callDetails.csv', function(error, sourceInfo) {
           if (!error && sourceInfo) {
               const dataset = new bigml.Dataset(connection);
@@ -35,12 +35,12 @@ const BigML = {
 
     return "Model created!";
   },
-  predict: function (toPredict) {
+  predict: async function (toPredict) {
     var prediction = new bigml.Prediction(connection);
 
     fs.readFile('model.txt', 'utf8', function(err, data){
       prediction.create(data, toPredict ,function(error, prediction) { 
-
+      
         var result = prediction.object.output + "";
         fs.writeFile('predict.txt', result, (err) => {
               if(err) return console.log(err);
@@ -49,6 +49,12 @@ const BigML = {
       });
     });
   }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+  });
 }
 
 module.exports = BigML
