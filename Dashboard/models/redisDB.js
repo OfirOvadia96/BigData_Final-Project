@@ -1,12 +1,25 @@
 const db = require('./connectRedis');
 
+// DB keys
+const keys = ["join", "service", "complaint", "leave", "waiting"];
+// data expiration time 
+const todayEnd = new Date().setHours(23, 59, 59, 999);
+
 const redisDB = {
+
+    setExpiresTime: function (key) {
+        // sets an expiration date for the data 
+        db.expireat(key, parseInt(todayEnd / 1000));
+    },
     initDB: async function() {
-        db.set('join', 0);
-        db.set('service', 0);
-        db.set('complaint', 0);
-        db.set('leave', 0);
-        db.set('waiting', 0);
+        keys.forEach(key => {
+            db.set(key, 0);
+        });
+    },
+    setExpiresTimeForAllKeys: function () {
+        keys.forEach(key => {
+            this.setExpiresTime(key);
+        });
     },
     incrementByOne: async function(key){
         try {
