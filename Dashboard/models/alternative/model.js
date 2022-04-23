@@ -2,12 +2,12 @@ const express = require('express')
 const axios = require('axios')
 const cors = require('cors')
 
-// const {
-//   client,
-//   getAsync,
-//   setAsync,
-//   initDatabase
-// } = require("./init_redis")
+const {
+  client,
+  getAsync,
+  setAsync,
+  initDatabase
+} = require("../connectRedis")
 
 const app = express()
 app.use(express.urlencoded({
