@@ -144,6 +144,9 @@
 </head>
 
 <body>
+	<img src="images/icons/phoneCall.jpg" alt="phoneCall" style="background-image: #c850c0;  width:150px;
+	height:110px;">
+
 	<br>
 	<br>
 	<br>
@@ -157,7 +160,6 @@
 		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls: <h1 class="counter"></h1>
 		</div>
 		<br>
-		<br>
 
 		<input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" />
 		&nbsp;
@@ -167,9 +169,10 @@
 			<option>Ordinary Days</option>
 		</select>
 
-		<hr>
+		<br>
+		<br>
 
-		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg" />
+		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg" style="text-align: center;" />
 
 		<div class="limiter">
 			<div class="container-table100">
