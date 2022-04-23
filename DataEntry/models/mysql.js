@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
     //Properties
     host: 'localhost',
     user: 'root',
-    password: 'Lior4007',
+    password: 'OfirOfir1996!',
     database: 'big_data'
 });
 
