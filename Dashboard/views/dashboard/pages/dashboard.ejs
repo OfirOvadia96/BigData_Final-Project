@@ -1194,8 +1194,10 @@
   <script>
         
         //Recive new call from kafka comsume
-        socket.on('data', function (msg) { 
-              document.getElementById('call').innerHTML = 'Last call: ' + msg;
+        socket.on('allData', function (msg) { 
+          prompt("socket connected!")
+          console.log('socket connected');
+          document.getElementById('call').innerHTML = 'Last call: ' + msg;
         });
 
   </script>

@@ -1,9 +1,0 @@
-{
-  "ExpandedNodes": [
-    "",
-    "\\MessageBroker",
-    "\\MessageBroker\\PublishToKafka"
-  ],
-  "SelectedNode": "\\MessageBroker\\PublishToKafka\\app.js",
-  "PreviewInSolutionExplorer": false
-}
