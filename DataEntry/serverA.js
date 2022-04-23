@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
 const io = require("socket.io")(server);
-var db = require('./models/mysql');
+//var db = require('./models/mysql');
 // const kafka = require("../MessageBroker/PublishToKafka/publish")
 const controllerRouter = require('./routes/controller'); //controller
 
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //----------------------------------------
 
 app.set('view engine', 'ejs');
-app.use(express.static("public"));
+app.use(express.static('./views/Calls_Table_Responsive'));
 
 
 //----------------Front side ------------------
