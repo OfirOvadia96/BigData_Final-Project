@@ -18,12 +18,13 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <script type='text/javascript'>
-
+	
+	
+	<script type='text/javascript'>
+	
         //socket is global
         const socket = io.connect();
         
@@ -52,23 +53,32 @@
 	<img src="./images/bigml.png" alt="bigml">
 	<h1>Predicting the topic of conversation</h1>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<!-- <h3 id="call"></h3> -->
 	<br>
 	<!--===============================================================================================-->
 	<body onload="initSocket()">
+		
 
 		<div class="container">
 			<div class="vertical-center">
-				<button class="model" onclick="train()">Create new model</button>
-				<button class="predict" onclick="predict()">Predict</button>
+				<button class="model" type="button" onclick="train()">Create a new model</button>
+				<button class="predict" type="button" onclick="predict()">Predict</button>
 			</div>
-		</div>
+		  </div>
+		  <br>
+		  <br>
 
-        <script type='text/javascript'>
 
+		<script type='text/javascript'>
             socket.on('NewCall', function (msg) {
 
-				document.getElementById("column2").innerHTML = 'HIIIII';
+				document.getElementById("column2").innerHTML = msg.firstname;
 				document.getElementById("column3").innerHTML = msg.lastname;
 				document.getElementById("column4").innerHTML = msg.phone;
 				document.getElementById("column5").innerHTML = msg.city;
