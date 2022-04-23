@@ -1,4 +1,8 @@
-const db = require('./connectRedis');
+const {
+    client,
+    getAsync,
+    setAsync
+  } = require("./init-redis")
 
 // DB keys
 const keys = ["join", "service", "complaint", "leave", "waiting"];
@@ -11,9 +15,9 @@ const redisDB = {
         // sets an expiration date for the data 
         db.expireat(key, parseInt(todayEnd / 1000));
     },
-    initDB: async function() {
+    initDB: function() {
         keys.forEach(key => {
-            db.set(key, 0);
+            setAsync(key, 0);
         });
         console.log('initDB');
     },
@@ -26,37 +30,34 @@ const redisDB = {
     incrementByOne: async function(key){
         try {
             // gets the data
-            let value = await db.get(key);
+            let value = await getAsync(key);
             console.log("current num: " + value);
         
             // increments and stores the updated data in the database
-            await db.set(key, ++value);
-            console.log(`updated ${key} number: ${value}`);
-
-            // sets an expiration date for the data 
-            this.setExpiresTime(key);
-            console.log('set an expiration date'); 
+            await setAsync(key, ++value);
+            console.log("update num: " + value);
+            // // sets an expiration date for the data 
+            // setExpiresTime(key);   
         
-        } catch (error) {
+          } catch (error) {
             console.log(error);
-        }
+          }
     },
     decrementByOne: async function(key) {
         try {
             // gets the data
-            let value = await db.get(key);
+            let value = await getAsync(key);
             console.log("current num: " + value);
         
             // increments and stores the updated data in the database
             if (value > 0) {
-                await db.set(key, --value);
+              await setAsync(key, --value);
             } else {
               console.log("value can not be negative");
             }
-            console.log(`updated ${key} number: ${value}`);
-            // sets an expiration date for the data 
-            this.setExpiresTime(key);   
-            console.log('set an expiration date'); 
+            console.log("update num: " + value);
+            // // sets an expiration date for the data 
+            // setExpiresTime(key);   
         
           } catch (error) {
             console.log(error);
@@ -64,6 +65,7 @@ const redisDB = {
     },
     setTopic: async function(topic) {
         // we can refactor this
+        console.log('topic: ' + topic);
         switch(topic) {
             case 'join':
                 await this.incrementByOne('join');
@@ -84,17 +86,17 @@ const redisDB = {
                 await this.decrementByOne('waiting');
                 break;
             default:
-                console.log('invalid topic');
+                 console.log('invalid topic');
                 break;
             }
     },
     getAllData: async function() {
         let allData = [];
-        allData.push(await db.get('join'));
-        allData.push(await db.get('service'));
-        allData.push(await db.get('complaint'));
-        allData.push(await db.get('leave'));
-        allData.push(await db.get('waiting'));
+        allData.push(await getAsync('join'));
+        allData.push(await getAsync('service'));
+        allData.push(await getAsync('complaint'));
+        allData.push(await getAsync('leave'));
+        allData.push(await getAsync('waiting'));
 
         return allData;
     }
