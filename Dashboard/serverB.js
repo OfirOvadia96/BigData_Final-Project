@@ -4,8 +4,10 @@ var server = require('http').createServer(app)
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-const redis = require("./models/redisDB");
 const kafka = require('./models/comsumeKafka');
+const { join } = require('path');
+const redis = require("./models/redisDB");
+const { setTopic } = require('./models/redisDB');
 
 const port = 3250
 //http://localhost:3250
@@ -18,9 +20,21 @@ app.use(express.json());
 
 // //**NEED TO INIT AFTER 24 HOURS */
 redis.initDB();
-console.log('initDB');
-redis.setExpiresTimeForAllKeys();
-console.log('setExpiresTimeForAllKeys');
+
+// simulation
+async function simulation() {
+    for (let i = 0; i < 20; i++) {
+        let input;
+        if (i % 4 == 0) input = 'join'
+        else if (i % 3 == 1) input = 'service'
+        else if (i % 2 == 1) input = 'complaint'
+        else input = 'leave'
+    
+        await redis.setTopic(input);
+    }
+  }
+//   simulation();
+  
 
 io.on("connection", async (socket) => {
     //Get data from redis to dashboard
@@ -99,7 +113,7 @@ function parsesDataToVariables(data) {
 }
 //------------------------------------------------
 
-server.listen(port, () => console.log(`BigML app listening at http://localhost:${port}`));
+server.listen(port, () => console.log(`Server B is listening at http://localhost:${port}`));
 
 
 //** To use with controller:
