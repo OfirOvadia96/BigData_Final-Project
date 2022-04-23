@@ -117,6 +117,7 @@ a:hover {
 /* ------------------------------------ */
 h1 {
   font-family: Georgia, serif;
+  font-weight: bold;
   color: white;
   font-size: 80px;
   line-height: 1em;

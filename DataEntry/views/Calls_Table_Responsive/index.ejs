@@ -6,8 +6,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -143,36 +141,35 @@
 </head>
 
 <body>
-	<img src="images/icons/phoneCall.jpg" alt="phoneCall" style="background-image: #c850c0;  width:150px;
-	height:110px;">
+	<img src="images/icons/phoneCall.jpg" alt="phoneCall" class="phoneicon">
 
-	<br>
-	<br>
-	<br>
 	<h1>Calls Screen</h1>
 	<br>
 	<br>
-	<br>
+
 	<!-- why body tag appears twice? -->
 
 	<body onload="initSocket()">
-		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls: <h1 class="counter"></h1>
+		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls: <h2 class="counter"></h2>
 		</div>
 		<br>
 
-		<input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" />
-		&nbsp;
-		<select class="selectpicker" data-style="btn-info">
-			<option value='Emergency'>Holidays</option>
-			<option>Summer Vacations</option>
-			<option>Ordinary Days</option>
-		</select>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" />
+		
+			&nbsp;
+			<select class="selectSpinner">
+				<option value='Emergency'>Holidays</option>
+				<option>Summer Vacations</option>
+				<option>Ordinary Days</option>
+			</select>
 
 		<br>
 		<br>
 
-		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg" style="text-align: center;" />
-
+			<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg" style="text-align: center;" />
+		</div>
+		
 		<div class="limiter">
 			<div class="container-table100">
 				<div class="wrap-table100">

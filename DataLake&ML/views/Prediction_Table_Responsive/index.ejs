@@ -64,16 +64,12 @@
 	<!--===============================================================================================-->
 	<body onload="initSocket()">
 		
-
-		<div class="container">
-			<div class="vertical-center">
-				<button class="model" type="button" onclick="train()">Create a new model</button>
-				<button class="predict" type="button" onclick="predict()">Predict</button>
-			</div>
+		  <div class="d-grid gap-2 d-md-block">
+			<button class="model" type="button" onclick="train()">Create a new model</button>
+			<button class="predict" type="button" onclick="predict()">Predict</button>
 		  </div>
 		  <br>
 		  <br>
-
 
 		<script type='text/javascript'>
             socket.on('NewCall', function (msg) {
