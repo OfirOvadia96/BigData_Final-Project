@@ -17,7 +17,10 @@ app.use(express.json());
 
 
 // //**NEED TO INIT AFTER 24 HOURS */
-// redis.initDB();
+redis.initDB();
+console.log('initDB');
+redis.setExpiresTimeForAllKeys();
+console.log('setExpiresTimeForAllKeys');
 
 io.on("connection", async (socket) => {
     //Get data from redis to dashboard

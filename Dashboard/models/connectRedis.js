@@ -1,12 +1,15 @@
 const redis = require('ioredis');
-const ENV_PATH = '/Users/liozakirav/Documents/computer-science/third-year/semester-b/big-data/project/BigData-Final-Project/.env'
+const ENV_PATH =  'C:\Lioz\BigData-Final-Project\.env'
 require('dotenv').config({ path: ENV_PATH})
+console.log('process.env.REDIS_AUTH: ' + process.env.REDIS_AUTH) // check
+
 
 const conn = {
     port: 6379,
     host: "127.0.0.1",
     db: 0,
-    password: process.env.REDIS_AUTH
+    // password: process.env.REDIS_AUTH
+    password: 'eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81'
 };
 
 const redisDb = new redis(conn);
