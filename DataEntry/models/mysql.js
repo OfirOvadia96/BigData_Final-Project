@@ -2,14 +2,22 @@ const mysql = require('mysql');
 const {faker} = require("@faker-js/faker");
 
 //Connect to MySQL DB
-var connection = mysql.createConnection({
-    //Properties
-    host: 'localhost',
-    user: 'root',
-    password: 'OfirOfir1996!',
-    port: '3306',
-    database: 'big_data'
-});
+// var connection = mysql.createConnection({
+//     //Properties
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'OfirOfir1996!',
+//     port: '3306',
+//     database: 'big_data'
+// });
+
+// var connection = mysql.createConnection({
+//   //Properties
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'Lior4007',
+//   database: 'big_data'
+// });
 
 //Function to create fake details person
 const randomPerson = () => {
@@ -28,24 +36,24 @@ const randomPerson = () => {
 }
 
 //Insert fake details person to DB (Table - users)
-connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
+// connection.connect(function(err) {
+//     if (err) throw err;
+//     console.log("Connected!");
 
-    for (let i = 0; i < 5; i++) {
+//     for (let i = 0; i < 5; i++) {
 
-        let person = randomPerson();
-        //Query of MySQL
-        var sql = `INSERT INTO users (id, first_name,last_name,phone,city,gender,age,prev_calls) 
-            VALUES (${person.id},'${person.firstName}','${person.lastName}','${person.phone}','${person.randomCity}','${person.randomGender}',${person.age},0);`;
-        //Insert row
-        connection.query(sql, function (err, result) {
-          if (err) throw err;
-          console.log(`${i+1} record inserted`);
-        });
-    }
-  });
+//         let person = randomPerson();
+//         //Query of MySQL
+//         var sql = `INSERT INTO users (id, first_name,last_name,phone,city,gender,age,prev_calls) 
+//             VALUES (${person.id},'${person.firstName}','${person.lastName}','${person.phone}','${person.randomCity}','${person.randomGender}',${person.age},0);`;
+//         //Insert row
+//         connection.query(sql, function (err, result) {
+//           if (err) throw err;
+//           console.log(`${i+1} record inserted`);
+//         });
+//     }
+//   });
 
-  module.exports = connection;
+//   module.exports = connection;
 
   //truncate big_data.users; - Delete all rows from table
