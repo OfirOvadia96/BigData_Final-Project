@@ -1193,10 +1193,10 @@
   <!--   Core JS Files   -->
   <script>
         
-        // //Recive new call from kafka comsume
-        // socket.on('newdata', function (msg) { 
-        //       document.getElementById('call').innerHTML = 'Last call: ' + msg;
-        // });
+        //Recive new call from kafka comsume
+        socket.on('data', function (msg) { 
+              document.getElementById('call').innerHTML = 'Last call: ' + msg;
+        });
 
   </script>
   <script src="../assets/js/core/popper.min.js"></script>
