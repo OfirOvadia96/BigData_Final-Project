@@ -124,6 +124,9 @@
             countCalls--;
             var counter = document.querySelector('.counter');
             counter.innerHTML = countCalls;
+
+            //Sent to socket the total waiting calls
+            socket.emit("totalWaitingCalls",countCalls);
         }
     </script>
 
