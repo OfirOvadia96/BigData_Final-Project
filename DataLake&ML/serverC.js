@@ -56,7 +56,6 @@ app.use(express.json());
 // });
 
 //----------------Front side ------------------
-
 app.use('/', controllerRouter);
 
 //-------- Socket.io ----------------

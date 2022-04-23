@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-module.exports = router;
-router.get('/', (req,res) => { //(URL || Path , Call back function)
-   // res.send('Our Website Part A');
-    res.render('body');
-});
+var db = require('../models/mysql');
 
-/*
-    app.get();
-    app.post();
-    app.put();
-    app.delete();
-*/
+
+router.get('/', (req, res) => { //(URL || Path , Call back function)
+    //Call Generator of users from MySQL
+    db.query("SELECT * FROM users;", function (err, result, fields) {
+        if (err) throw err;
+        res.render('index', {data: result})
+    });
+})
+
+
+module.exports = router;
