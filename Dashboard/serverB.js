@@ -4,7 +4,7 @@ var server = require('http').createServer(app)
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-const kafka = require('./models/comsumeKafka');
+// const kafka = require('./models/comsumeKafka');
 const { join } = require('path');
 const redis = require("./models/redisDB");
 const { setTopic } = require('./models/redisDB');
@@ -19,7 +19,7 @@ app.use(express.json());
 
 
 // //**NEED TO INIT AFTER 24 HOURS */
-redis.initDB();
+// redis.initDB();
 
 // simulation
 async function simulation() {
@@ -33,10 +33,10 @@ async function simulation() {
         await redis.setTopic(input);
     }
   }
-//   simulation();
+  simulation();
   
-
 io.on("connection", async (socket) => {
+    console.log('socketID: ' + socket.id)
     //Get data from redis to dashboard
     let allDataArray = redis.getAllTopics();
     io.emit('allData', 
@@ -44,25 +44,25 @@ io.on("connection", async (socket) => {
 });
 
 //------------Consumer from Kafka-----------------
-kafka.consumer.on("data", (msg) => {
-    const newCall = JSON.parse(msg.value);
+// kafka.consumer.on("data", (msg) => {
+//     const newCall = JSON.parse(msg.value);
 
-    // **Store the data in Redis and after send to Dashboard */
+//     // **Store the data in Redis and after send to Dashboard */
 
-    if(newCall.length < 100) //Total wating calls ***NEED TO DO FUNCTION FOR DECREASE TOTAL WAITING
-    {
-        redis.setTopic('TotalWaiting');
-    }
-    else // Details calls
-    {   
-        redis.setTopic(newCall.topic);
-    }
+//     if(newCall.length < 100) //Total wating calls ***NEED TO DO FUNCTION FOR DECREASE TOTAL WAITING
+//     {
+//         redis.setTopic('TotalWaiting');
+//     }
+//     else // Details calls
+//     {   
+//         redis.setTopic(newCall.topic);
+//     }
 
-    //Get data from redis to dashboard
-    let allDataArray = redis.getAllData();
-    io.emit('allData', 
-    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
-});
+//     //Get data from redis to dashboard
+//     let allDataArray = redis.getAllData();
+//     io.emit('allData', 
+//     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
+// });
 
 //----------------Front side ------------------
 

@@ -25,6 +25,14 @@ const redisDB = {
     },
     incrementByOne: async function(key){
         try {
+            // check if the key exists
+            const exists = await db.exists(key);
+
+            if(!exists) {
+               // init the key
+               db.set(key, 0);  
+            }
+
             // gets the data
             let value = await db.get(key);
             console.log("current num: " + value);
@@ -41,26 +49,40 @@ const redisDB = {
             console.log(error);
         }
     },
-    decrementByOne: async function(key) {
-        try {
-            // gets the data
-            let value = await db.get(key);
-            console.log("current num: " + value);
+    // decrementByOne: async function(key) {
+    //     try {
+    //         // gets the data
+    //         let value = await db.get(key);
+    //         console.log("current num: " + value);
         
-            // increments and stores the updated data in the database
-            if (value > 0) {
-                await db.set(key, --value);
-            } else {
-              console.log("value can not be negative");
-            }
+    //         // increments and stores the updated data in the database
+    //         if (value > 0) {
+    //             await db.set(key, --value);
+    //         } else {
+    //           console.log("value can not be negative");
+    //         }
+    //         console.log(`updated ${key} number: ${value}`);
+    //         // sets an expiration date for the data 
+    //         this.setExpiresTime(key);   
+    //         console.log('set an expiration date'); 
+        
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    // },
+    setWaiting: async function(key, value){
+        try {
+            // stores the data in the database
+            await db.set(key, value);
             console.log(`updated ${key} number: ${value}`);
+
             // sets an expiration date for the data 
-            this.setExpiresTime(key);   
+            this.setExpiresTime(key);
             console.log('set an expiration date'); 
         
-          } catch (error) {
+        } catch (error) {
             console.log(error);
-          }
+        }
     },
     setTopic: async function(topic) {
         // we can refactor this
@@ -78,11 +100,14 @@ const redisDB = {
                 await this.incrementByOne('leave');
                 break;
             case 'TotalWaiting':
-                await this.incrementByOne('waiting');
+                await this.setWaiting('waiting', value);
                 break;
-            case 'decrementTotalWaiting':
-                await this.decrementByOne('waiting');
-                break;
+            // case 'TotalWaiting':
+            //     await this.incrementByOne('waiting');
+            //     break;
+            // case 'decrementTotalWaiting':
+            //     await this.decrementByOne('waiting');
+            //     break;
             default:
                 console.log('invalid topic');
                 break;
