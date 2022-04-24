@@ -5,7 +5,6 @@ const keys = ["join", "service", "complaint", "leave", "waiting","averageTime"];
 // data expiration time 
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
-
 const redisDB = {
 
     setExpiresTime: function (key) {
