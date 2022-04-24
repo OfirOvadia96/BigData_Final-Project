@@ -252,10 +252,26 @@
               document.getElementById('totalwaitingcalls').innerHTML = msg.waiting;
               document.getElementById('totalcalls').innerHTML = parseInt(msg.join) + parseInt(msg.service) + parseInt(msg.complaint) + parseInt(msg.leave);
             });
+
+            //reset the redisDB
+            socket.on('resetData', function () { 
+              reset();
+            });
         }
 
         function reset() {
-            
+          console.log('reset data');
+              document.getElementById('join').innerHTML = 0;
+              document.getElementById('service').innerHTML = 0;
+              document.getElementById('complaint').innerHTML = 0;
+              document.getElementById('leave').innerHTML = 0;
+              alert("THE DATA HAS BEEN RESET");
+              
+              resetDB();
+        }
+
+        function resetDB() {
+          socket.emit('resetDB');
         }
 
 
