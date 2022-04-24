@@ -127,9 +127,9 @@ const redisDB = {
         }
        
         let totalTime = await db.get("averageTime");
-        let calls = await db.get("join") + await db.get("service") + await db.get("complaint") + await db.get("leave");
+        let calls = parseInt(await db.get("join")) + parseInt(await db.get("service")) + parseInt(await db.get("complaint")) + parseInt(await db.get("leave"));
         
-        return (totalTime/calls)/60;
+        return ((parseInt(totalTime)/calls)/60).toFixed(4);
     },
 }
 
