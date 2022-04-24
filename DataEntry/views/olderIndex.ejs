@@ -59,7 +59,7 @@
             const [{ value: month }, , { value: day }, , { value: year }, , { value: hour }, , { value: minute }] = dateTimeFormat.formatToParts(date)
 
             var person = randomPerson();
-            var randomPrevCalls = Math.floor(Math.random() * 50) + 1;
+            var randomPrevCalls = Math.floor(Math.random() * 200) + 1;
             cID.innerHTML = `<div id=${person.id}>${person.id}</div>`;
             cFirstName.innerHTML = `<div id=${person.first_name}>${person.first_name}</div>`;
             cLastName.innerHTML = `<div id=${person.last_name}>${person.last_name}</div>`;

@@ -72,7 +72,7 @@ const redisDB = {
             console.log(error);
         }
     },
-    setTopic: async function(topic) {
+    setTopic: async function(topic, value) {
         // we can refactor this
         switch(topic) {
             case 'join':
@@ -90,12 +90,6 @@ const redisDB = {
             case 'TotalWaiting':
                 await this.setWaiting('waiting', value);
                 break;
-            // case 'TotalWaiting':
-            //     await this.incrementByOne('waiting');
-            //     break;
-            // case 'decrementTotalWaiting':
-            //     await this.decrementByOne('waiting');
-            //     break;
             default:
                 console.log('invalid topic');
                 break;
