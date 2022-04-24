@@ -31,22 +31,36 @@ body, html {
 }
 
 /* ------------------------------------ */
-phoneicon{
-  width:100px;
-  height:80px;
+.phoneicon{
+ 
   background: #c850c0;
   background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
   background: -o-linear-gradient(45deg, #4158d0, #c850c0);
   background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
   background: linear-gradient(45deg, #4158d0, #c850c0);
-
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:150px;
+  height:110px;
 }
-NumberTitle{
+.NumberTitle{
   text-align: center;
+  color: darkred;
+  font-size: 40px;
+  font-family: Georgia, serif;
 }
 
-counter{
+.counter{
   text-align: center;
+  font-size: 50px;
+  color: red;
+}
+
+.selectSpinner{
+  text-align: center;
+  margin: auto;
+  
 }
 
 
@@ -70,13 +84,14 @@ a:hover {
 h1 {
   font-family: Georgia, serif;
   color: white;
-  font-size: 90px;
+  font-size: 100px;
   line-height: 1em;
   margin: 0 0 0 60px;
   text-align: center;
+  font-weight: bold;
+
 }
 
-h2,h3,h4,h5,h6 {margin: 0px;}
 
 p {margin: 0px;}
 

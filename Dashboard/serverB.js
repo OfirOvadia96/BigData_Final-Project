@@ -4,10 +4,10 @@ var server = require('http').createServer(app)
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-// const kafka = require('./models/comsumeKafka');
-const { join } = require('path');
+const kafka = require('./models/comsumeKafka');
 const redis = require("./models/redisDB");
-const { setTopic } = require('./models/redisDB');
+// const { setTopic } = require('./models/redisDB');
+// const { join } = require('path');
 
 const port = 3250
 //http://localhost:3250
@@ -36,33 +36,34 @@ app.use(express.json());
 //   simulation();
   
 io.on("connection", async (socket) => {
-    console.log('socketID: ' + socket.id)
     //Get data from redis to dashboard
-    let allDataArray = redis.getAllTopics();
+    let allDataArray = await redis.getAllData();
+    console.log(allDataArray[0]+" | "+allDataArray[1]+" | "+allDataArray[2]+" | "+allDataArray[3]+" | "+allDataArray[4]);
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
 });
 
 //------------Consumer from Kafka-----------------
-kafka.consumer.on("data", (msg) => {
+kafka.consumer.on("data", async (msg) => {
     const newCall = JSON.parse(msg.value);
 
     // **Store the data in Redis and after send to Dashboard */
 
-    if(newCall.length < 100) //Total wating calls ***NEED TO DO FUNCTION FOR DECREASE TOTAL WAITING
+    if(newCall.length < 100) //Total wating calls
     {
         redis.setTopic('TotalWaiting');
     }
-    else // Details calls
+    else if(String(msg.value).includes("topic")) // Details calls
     {   
         redis.setTopic(newCall.topic);
     }
 
     //Get data from redis to dashboard
-    let allDataArray = redis.getAllData();
+    let allDataArray = await redis.getAllData();
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
 });
+
 
 //----------------Front side ------------------
 

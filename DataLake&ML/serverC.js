@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
             mongodb.saveDetailCall(msg);
 
         }
-        else{ //Data for predict in BigML
+        else if(String(msg.value).length > 100){ //Data for predict in BigML
             const newCall = JSON.parse(msg.value);
             socket.emit("NewCall", 
             {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
@@ -40,20 +40,6 @@ io.on("connection", (socket) => {
 
     });
 });
-
-//     //** FOR CHECK!!!! */
-//     const newCall = {
-//         "id:": 123456,
-//         "firstName": "Ben",
-//         "lastName": "Cohen",
-//         "phone": "0502324534",
-//         "city": "Tel-Aviv",
-//         "gender": "Male",
-//         "age": 18,
-//         "prevCalls": 10,
-//         };
-//     socket.emit("NewCall", 
-//     {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
 
 //----------------Front side ------------------
 app.use('/', controllerRouter);
