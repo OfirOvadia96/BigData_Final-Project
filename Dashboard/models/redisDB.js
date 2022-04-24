@@ -41,9 +41,9 @@ const redisDB = {
             await db.set(key, ++value);
             console.log(`updated ${key} number: ${value}`);
 
-            // sets an expiration date for the data 
-            this.setExpiresTime(key);
-            console.log('set an expiration date'); 
+            // // sets an expiration date for the data 
+            // this.setExpiresTime(key);
+            // console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
@@ -76,9 +76,9 @@ const redisDB = {
             await db.set(key, value);
             console.log(`updated ${key} number: ${value}`);
 
-            // sets an expiration date for the data 
-            this.setExpiresTime(key);
-            console.log('set an expiration date'); 
+            // // sets an expiration date for the data 
+            // this.setExpiresTime(key);
+            // console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
@@ -120,7 +120,7 @@ const redisDB = {
         allData.push(await db.get('complaint'));
         allData.push(await db.get('leave'));
         allData.push(await db.get('waiting'));
-
+        console.log("Get all data from Redis!");
         return allData;
     }
 }

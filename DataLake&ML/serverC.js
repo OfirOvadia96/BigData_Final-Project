@@ -7,7 +7,7 @@ const io = require("socket.io")(server, {
 var fs = require("fs");
 const BigML = require('./models/bml');
 const mongodb = require('./models/MongoDB/mongodb');
-// const kafka = require("./models/comsumeKafka");
+const kafka = require("./models/comsumeKafka");
 
 const controllerRouter = require('./routes/controller'); //controller
 
@@ -22,38 +22,24 @@ app.use(express.json());
 
 //------------Consumer from Kafka-----------------
 
-// var newcall = "Waiting for new call...";
+var newcall = "Waiting for new call...";
 
-// io.on("connection", (socket) => {
-//     kafka.consumer.on("data", (msg) => {
-//         if(String(msg.value).includes("topic")){ //Data for MongoDB
+io.on("connection", (socket) => {
+    kafka.consumer.on("data", (msg) => {
+        if(String(msg.value).includes("topic")){ //Data for MongoDB
             
-//             mongodb.saveDetailCall(msg);
+            mongodb.saveDetailCall(msg);
 
-//         }
-//         else{ //Data for predict in BigML
-//             const newCall = JSON.parse(msg.value);
-//             socket.emit("NewCall", 
-//             {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
-//             newcall = msg.value;
-//         }
+        }
+        else if(String(msg.value).length > 100){ //Data for predict in BigML
+            const newCall = JSON.parse(msg.value);
+            socket.emit("NewCall", 
+            {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
+            newcall = msg.value;
+        }
 
-//     });
-
-//     //** FOR CHECK!!!! */
-//     const newCall = {
-//         "id:": 123456,
-//         "firstName": "Ben",
-//         "lastName": "Cohen",
-//         "phone": "0502324534",
-//         "city": "Tel-Aviv",
-//         "gender": "Male",
-//         "age": 18,
-//         "prevCalls": 10,
-//         };
-//     socket.emit("NewCall", 
-//     {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
-// });
+    });
+});
 
 //----------------Front side ------------------
 app.use('/', controllerRouter);

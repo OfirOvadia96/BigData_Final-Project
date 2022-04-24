@@ -1,10 +1,4 @@
-
-
-
-<!-- Not in use right now -->
-
-
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +22,7 @@
         }
 
         var countCalls = 0;
-        var rows = JSON.stringify(data)
+        var rows = <%-JSON.stringify(data)%>;
 
         function randomPerson(){
             var min = 0;
@@ -130,6 +124,9 @@
             countCalls--;
             var counter = document.querySelector('.counter');
             counter.innerHTML = countCalls;
+
+            //Sent to socket the total waiting calls
+            socket.emit("totalWaitingCalls",countCalls);
         }
     </script>
 
@@ -160,4 +157,4 @@
         </table>
     </body>
 </body>
-</html> -->
+</html>
