@@ -28,13 +28,15 @@ io.on("connection", async (socket) => {
     console.log(allDataArray[0]+" | "+allDataArray[1]+" | "+allDataArray[2]+" | "+allDataArray[3]+" | "+allDataArray[4]);
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
+
 });
 
-//------------Consumer from Kafka-----------------
+// ------------Consumer from Kafka-----------------
 kafka.consumer.on("data", async (msg) => {
     const newCall = JSON.parse(msg.value);
 
     // **Store the data in Redis and after send to Dashboard */
+
 
     if(String(msg.value).length < 100) //Total wating calls
     {
