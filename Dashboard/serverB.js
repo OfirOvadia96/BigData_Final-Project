@@ -9,6 +9,7 @@ const redis = require("./models/redisDB");
 
 const port = 3250
 //http://localhost:3250
+
 //--------------Middleware------------------
 
 app.set('view engine', 'ejs');
@@ -18,13 +19,15 @@ app.use(express.json());
 
 // //**NEED TO INIT AFTER 24 HOURS */
 // redis.initDB();
-  
+
+//-------------Socket.io-------------------------
 io.on("connection", async (socket) => {
     //Get data from redis to dashboard
     let allDataArray = await redis.getAllData();
+    let getAverageTime = await redis.getAverageTime();
     console.log(allDataArray[0]+" | "+allDataArray[1]+" | "+allDataArray[2]+" | "+allDataArray[3]+" | "+allDataArray[4]);
     io.emit('allData', 
-    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
+    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
 });
 
 //------------Consumer from Kafka-----------------
@@ -40,12 +43,15 @@ kafka.consumer.on("data", async (msg) => {
     else if(String(msg.value).includes("topic")) // Details calls
     {   
         redis.setTopic(newCall.topic,0);
+        redis.setAverageTime(newCall.TotalTime);
     }
 
     //Get data from redis to dashboard
     let allDataArray = await redis.getAllData();
+    let getAverageTime = await redis.getAverageTime();
+    //Send to front with socket
     io.emit('allData', 
-    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
+    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
 });
 
 
