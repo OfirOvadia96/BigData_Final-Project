@@ -26,42 +26,25 @@ io.on("connection", async (socket) => {
     //Get data from redis to dashboard
     let allDataArray = await redis.getAllData();
     let getAverageTime = await redis.getAverageTime();
+    
     console.log(allDataArray[0]+" | "+allDataArray[1]+" | "+allDataArray[2]+" | "+allDataArray[3]+" | "+allDataArray[4]);
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
 
-    // reset the data at midnight
-    // io.emit('resetData');
 
+    //Reset Info Manualiy
     socket.on('resetDB', function () {
-        console.log('*************recived a reset call**********************');
         // reset redis
         redis.initDB(); 
     });
 
 });
 
-
-
-// //reciveing data from dashboard
-// io.on("connection", (socket) => {
-
-//     socket.on('resetDB', function () {
-//         console.log('*************recived a reset call**********************');
-//         // reset redis
-//         redis.initDB(); 
-//     });
-// });
-
-
-
 // ------------Consumer from Kafka-----------------
 kafka.consumer.on("data", async (msg) => {
     const newCall = JSON.parse(msg.value);
 
     // **Store the data in Redis and after send to Dashboard */
-  
-
     if(String(msg.value).length < 100) //Total wating calls
     {
         redis.setTopic('TotalWaiting',parseInt(msg.value));
@@ -75,6 +58,7 @@ kafka.consumer.on("data", async (msg) => {
     //Get data from redis to dashboard
     let allDataArray = await redis.getAllData();
     let getAverageTime = await redis.getAverageTime();
+    
     //Send to front with socket
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
