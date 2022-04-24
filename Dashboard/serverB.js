@@ -32,19 +32,26 @@ io.on("connection", async (socket) => {
 
     // reset the data at midnight
     // io.emit('resetData');
-});
-
-
-
-//reciveing data from dashboard
-io.on("connection", (socket) => {
 
     socket.on('resetDB', function () {
         console.log('*************recived a reset call**********************');
         // reset redis
         redis.initDB(); 
     });
+
 });
+
+
+
+// //reciveing data from dashboard
+// io.on("connection", (socket) => {
+
+//     socket.on('resetDB', function () {
+//         console.log('*************recived a reset call**********************');
+//         // reset redis
+//         redis.initDB(); 
+//     });
+// });
 
 
 
@@ -62,7 +69,7 @@ kafka.consumer.on("data", async (msg) => {
     else if(String(msg.value).includes("topic")) // Details calls
     {   
         redis.setTopic(newCall.topic,0);
-        redis.setAverageTime(newCall.TotalTime);
+        redis.setAverageTime(newCall.totalTime);
     }
 
     //Get data from redis to dashboard
