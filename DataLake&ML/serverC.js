@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
         var res = await BigML.createModel();
         setTimeout(function(){
             socket.emit("Model", res);
-        }, 10000);
+        }, 5000);
     });
 
     socket.on('Predict', async (msg) => 
@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
             fs.readFile('predict.txt', 'utf8', function(err, data){
                 socket.emit("Prediction", data);
             });
-        }, 3000);
+        }, 2000);
     });
 
 });
