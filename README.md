@@ -1,9 +1,24 @@
 <h1> BigData-Final-Project </h1>
 </p>
 
+
+<h3> Project Structure: </h3>
+
+<br/>
+
+<p align='center'><a href="#"><img src="https://imgur.com/C0FmrnR.png"  width="500" height="400" /></a></p>
+</br></br>
+
+###
+<b>The project follows Model-View-Controller design pattern</b><br />
+<p align='center'><a href="#"><img align='center' src="https://i.imgur.com/IQi5nsu.png" width="400"></a></p>
+<br />
+
 <h3> Tools: </h3>
 
 <span>
+   <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" alt="Heroku" height="30"/>
+   <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="mySQL" height="30"/>
    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongoDB" height="30"/>
   <img src="https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white" alt="redis" height="30"/>
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="nodeJS" height="30"/>
@@ -13,16 +28,7 @@
   <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white" alt="css" height="30"/>
 </span>
 
-## Project Structure:
-
-<img src="https://imgur.com/C0FmrnR.png"  width="500" height="400" />
-</br></br>
-
-###
-<b>The project follows Model-View-Controller design pattern</b><br />
-<p align='center'><a href="#"><img align='center' src="https://github.com/AlmogJakov/TutorTime/blob/main/images/mvc.png" width="300"></a></p>   
-<br />
-
+<br/>
 
 ## Teammates:
 
@@ -31,8 +37,8 @@
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/LiorAtiya"><img src="https://i.ibb.co/G9Nq6X0/Screenshot-2021-12-01-221123.png" width="200px;" alt=""/><br /><sub><b>Lior Atiya</b></sub></a><br /> </td>
-    <td align="center"><a href="https://github.com/OfirOvadia96"><img src="https://imgur.com/8S5Bma2.png" width="170px;" alt=""/><br /><sub><b>Ofir Ovadia</b></sub></a><br /> </td>
-    <td align="center"><a href="https://github.com/Lioo7"><img src="https://i.ibb.co/8DcPJcp/147595777-5e237203-7eee-4c11-b680-edda12b83979.png" width="200px;" alt=""/><br /><sub><b>Lioz Akirav</b></sub></a><br /> </td>
+    <td align="center"><a href="https://github.com/LiorAtiya"><img src="https://i.ibb.co/G9Nq6X0/Screenshot-2021-12-01-221123.png" width="150px;" alt=""/><br /><sub><b>Lior Atiya</b></sub></a><br /> </td>
+    <td align="center"><a href="https://github.com/OfirOvadia96"><img src="https://imgur.com/8S5Bma2.png" width="120px;" alt=""/><br /><sub><b>Ofir Ovadia</b></sub></a><br /> </td>
+    <td align="center"><a href="https://github.com/Lioo7"><img src="https://i.ibb.co/8DcPJcp/147595777-5e237203-7eee-4c11-b680-edda12b83979.png" width="150px;" alt=""/><br /><sub><b>Lioz Akirav</b></sub></a><br /> </td>
   </tr>
 </table>

@@ -1,15 +1,38 @@
 const db = require('./connectRedis');
 
+// DB keys
+const keys = ["join", "service", "complaint", "leave", "waiting"];
+// data expiration time 
+const todayEnd = new Date().setHours(23, 59, 59, 999);
+
 const redisDB = {
+
+    setExpiresTime: function (key) {
+        // sets an expiration date for the data 
+        db.expireat(key, parseInt(todayEnd / 1000));
+    },
     initDB: async function() {
-        db.set('join', 0);
-        db.set('service', 0);
-        db.set('complaint', 0);
-        db.set('leave', 0);
-        db.set('waiting', 0);
+        keys.forEach(key => {
+            db.set(key, 0);
+        });
+        console.log('initDB');
+    },
+    setExpiresTimeForAllKeys: function () {
+        keys.forEach(key => {
+            this.setExpiresTime(key);
+        });
+        console.log('setExpiresTimeForAllKeys');
     },
     incrementByOne: async function(key){
         try {
+            // check if the key exists
+            const exists = await db.exists(key);
+
+            if(!exists) {
+               // init the key
+               db.set(key, 0);  
+            }
+
             // gets the data
             let value = await db.get(key);
             console.log("current num: " + value);
@@ -18,54 +41,75 @@ const redisDB = {
             await db.set(key, ++value);
             console.log(`updated ${key} number: ${value}`);
 
-            // // sets an expiration date for the data 
-            // setExpiresTime(key);   
+            // sets an expiration date for the data 
+            this.setExpiresTime(key);
+            console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
         }
     },
-    decrementByOne: async function(key) {
+    // decrementByOne: async function(key) {
+    //     try {
+    //         // gets the data
+    //         let value = await db.get(key);
+    //         console.log("current num: " + value);
+        
+    //         // increments and stores the updated data in the database
+    //         if (value > 0) {
+    //             await db.set(key, --value);
+    //         } else {
+    //           console.log("value can not be negative");
+    //         }
+    //         console.log(`updated ${key} number: ${value}`);
+    //         // sets an expiration date for the data 
+    //         this.setExpiresTime(key);   
+    //         console.log('set an expiration date'); 
+        
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    // },
+    setWaiting: async function(key, value){
         try {
-            // gets the data
-            let value = await db.get(key);
-            console.log("current num: " + value);
-        
-            // increments and stores the updated data in the database
-            if (value > 0) {
-                await db.set(key, --value);
-            } else {
-              console.log("value can not be negative");
-            }
+            // stores the data in the database
+            await db.set(key, value);
             console.log(`updated ${key} number: ${value}`);
-            // // sets an expiration date for the data 
-            // setExpiresTime(key);   
+
+            // sets an expiration date for the data 
+            this.setExpiresTime(key);
+            console.log('set an expiration date'); 
         
-          } catch (error) {
+        } catch (error) {
             console.log(error);
-          }
+        }
     },
     setTopic: async function(topic) {
+        // we can refactor this
         switch(topic) {
             case 'join':
-                this.incrementByOne('join');
+                await this.incrementByOne('join');
                 break;
             case 'service':
-                this.incrementByOne('service');
+                await this.incrementByOne('service');
                 break;
             case 'complaint':
-                this.incrementByOne('complaint');
+                await this.incrementByOne('complaint');
                 break;
             case 'leave':
-                this.incrementByOne('leave');
+                await this.incrementByOne('leave');
                 break;
             case 'TotalWaiting':
-                this.incrementByOne('waiting');
+                await this.setWaiting('waiting', value);
                 break;
-            case 'decrementTotalWaiting':
-                this.decrementByOne('waiting');
-                break;
+            // case 'TotalWaiting':
+            //     await this.incrementByOne('waiting');
+            //     break;
+            // case 'decrementTotalWaiting':
+            //     await this.decrementByOne('waiting');
+            //     break;
             default:
+                console.log('invalid topic');
                 break;
             }
     },

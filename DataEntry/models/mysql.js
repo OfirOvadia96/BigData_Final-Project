@@ -2,12 +2,21 @@ const mysql = require('mysql');
 const {faker} = require("@faker-js/faker");
 
 //Connect to MySQL DB
+// var connection = mysql.createConnection({
+//     //Properties
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'OfirOfir1996!',
+//     port: '3306',
+//     database: 'big_data'
+// });
+
 var connection = mysql.createConnection({
-    //Properties
-    host: 'localhost',
-    user: 'root',
-    password: 'Lior4007',
-    database: 'big_data'
+  //Properties
+  host: 'localhost',
+  user: 'root',
+  password: 'Lior4007',
+  database: 'big_data'
 });
 
 //Function to create fake details person
@@ -26,7 +35,7 @@ const randomPerson = () => {
     return person;
 }
 
-//Insert fake details person to DB (Table - users)
+// Insert fake details person to DB (Table - users)
 connection.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");

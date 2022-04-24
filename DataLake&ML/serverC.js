@@ -11,13 +11,12 @@ const kafka = require("./models/comsumeKafka");
 
 const controllerRouter = require('./routes/controller'); //controller
 
-const port = 3245
+const port = 3000
 //http://localhost:3245
 
 //--------------Middleware------------------
 
 app.set('view engine', 'ejs');
-// app.use(express.static("public"));
 app.use(express.static('./views/Prediction_Table_Responsive'));
 app.use(express.json());
 
@@ -42,13 +41,22 @@ io.on("connection", (socket) => {
     });
 });
 
+//     //** FOR CHECK!!!! */
+//     const newCall = {
+//         "id:": 123456,
+//         "firstName": "Ben",
+//         "lastName": "Cohen",
+//         "phone": "0502324534",
+//         "city": "Tel-Aviv",
+//         "gender": "Male",
+//         "age": 18,
+//         "prevCalls": 10,
+//         };
+//     socket.emit("NewCall", 
+//     {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone, city: newCall.city, gender: newCall.gender, age: newCall.age, prevcalls: newCall.prevCalls});
+
 //----------------Front side ------------------
-
 app.use('/', controllerRouter);
-
-// app.get('/', (req, res) => {
-//     res.render('index', {data: newcall})
-// })
 
 //-------- Socket.io ----------------
 io.on("connection", (socket) => {
@@ -72,9 +80,3 @@ io.on("connection", (socket) => {
 });
 
 server.listen(port, () => console.log(`BigML app listening at http://localhost:${port}`));
-
-
-//** To use with controller:
-
-// const controllerRouter = require('./routes/controller');
-// app.use('/', controllerRouter);
