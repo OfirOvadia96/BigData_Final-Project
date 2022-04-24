@@ -45,7 +45,7 @@ kafka.consumer.on("data", async (msg) => {
     else if(String(msg.value).includes("topic")) // Details calls
     {   
         redis.setTopic(newCall.topic,0);
-        redis.setAverageTime(newCall.TotalTime);
+        redis.setAverageTime(newCall.totalTime);
     }
 
     //Get data from redis to dashboard

@@ -5,5 +5,9 @@
     "express": "^4.17.3",
     "mysql": "^2.18.1",
     "socket.io": "^4.4.1"
+  },
+  "name": "server",
+  "scripts": {
+    "start": "nodemon serverA.js"
   }
 }
