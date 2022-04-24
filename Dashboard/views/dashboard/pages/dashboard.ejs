@@ -38,6 +38,8 @@
               </svg>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
+            <li class="nav-item">
+              <button type="button" class="btn btn-danger" onclick="reset()">Reset Data</button>
           </a>
         </li>
       </ul>
@@ -419,7 +421,7 @@
   </div>
   <!--   Core JS Files   -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  <script>
+  <script> // functions 
 
         function initSocket() {
 
@@ -436,6 +438,10 @@
               document.getElementById('complaint').innerHTML = msg.complaint;
               document.getElementById('leave').innerHTML = msg.leave;
             });
+        }
+
+        function reset() {
+            
         }
 
 
