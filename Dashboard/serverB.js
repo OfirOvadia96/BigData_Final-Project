@@ -4,12 +4,11 @@ var server = require('http').createServer(app)
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-// const kafka = require('./models/comsumeKafka');
+const kafka = require('./models/comsumeKafka');
 const redis = require("./models/redisDB");
 const { setTopic } = require('./models/redisDB');
 const { join } = require('path');
 const redisDB = require('./models/redisDB');
-const db = require('./models/connectRedis');
 
 const port = 3250
 //http://localhost:3250
@@ -23,50 +22,66 @@ app.use(express.json());
 // //**NEED TO INIT AFTER 24 HOURS */
 // redis.initDB();
 
-// simulation
-async function simulation() {
-    for (let i = 0; i < 20; i++) {
-        let input;
-        if (i % 4 == 0) input = 'join'
-        else if (i % 3 == 1) input = 'service'
-        else if (i % 2 == 1) input = 'complaint'
-        else input = 'leave'
+// // simulation
+// async function simulation() {
+//     for (let i = 0; i < 20; i++) {
+//         let input;
+//         if (i % 4 == 0) input = 'join'
+//         else if (i % 3 == 1) input = 'service'
+//         else if (i % 2 == 1) input = 'complaint'
+//         else input = 'leave'
     
-        await redis.setTopic(input);
-    }
-  }
-  simulation();
-  
+//         await redis.setTopic(input);
+//     }
+//   }
+//   simulation();
+
+
 io.on("connection", async (socket) => {
     //Get data from redis to dashboard
     let allDataArray = await redis.getAllData();
     console.log(allDataArray[0]+" | "+allDataArray[1]+" | "+allDataArray[2]+" | "+allDataArray[3]+" | "+allDataArray[4]);
     io.emit('allData', 
-    // {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
-    {join: await db.get('join'),service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
+    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
 
+    // reset the data at midnight
+    // io.emit('resetData');
 });
 
+
+//reciveing data from dashboard
+io.on("connection", (socket) => {
+
+    socket.on('resetDB', function () {
+        console.log('*************recived a reset call**********************');
+        // reset redis
+        redis.initDB(); 
+    });
+});
+
+
+
 // ------------Consumer from Kafka-----------------
-// kafka.consumer.on("data", async (msg) => {
-//     const newCall = JSON.parse(msg.value);
+kafka.consumer.on("data", async (msg) => {
+    const newCall = JSON.parse(msg.value);
 
-//     // **Store the data in Redis and after send to Dashboard */
+    // **Store the data in Redis and after send to Dashboard */
 
-//     if(newCall.length < 100) //Total wating calls
-//     {
-//         redis.setTopic('TotalWaiting');
-//     }
-//     else if(String(msg.value).includes("topic")) // Details calls
-//     {   
-//         redis.setTopic(newCall.topic);
-//     }
+    if(newCall.length < 100) //Total wating calls
+    {
+        redis.setTopic('TotalWaiting');
+    }
+    else if(String(msg.value).includes("topic")) // Details calls
+    {   
+        redis.setTopic(newCall.topic);
+    }
 
-//     //Get data from redis to dashboard
-//     let allDataArray = await redis.getAllData();
-//     io.emit('allData', 
-//     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
-// });
+    //Get data from redis to dashboard
+    let allDataArray = await redis.getAllData();
+    io.emit('allData', 
+    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4]});
+});
+
 
 
 //----------------Front side ------------------
@@ -79,6 +94,10 @@ app.get('/', function (req, res) {
         url: url,
         thumbnailUrl: thumbnailUrl
     });
+})
+
+app.get('/pages/dashboard.html', function (req, res) {
+    res.redirect('/');
 })
 
 // where style files will be
