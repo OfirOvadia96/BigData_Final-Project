@@ -49,27 +49,6 @@ const redisDB = {
             console.log(error);
         }
     },
-    // decrementByOne: async function(key) {
-    //     try {
-    //         // gets the data
-    //         let value = await db.get(key);
-    //         console.log("current num: " + value);
-        
-    //         // increments and stores the updated data in the database
-    //         if (value > 0) {
-    //             await db.set(key, --value);
-    //         } else {
-    //           console.log("value can not be negative");
-    //         }
-    //         console.log(`updated ${key} number: ${value}`);
-    //         // sets an expiration date for the data 
-    //         this.setExpiresTime(key);   
-    //         console.log('set an expiration date'); 
-        
-    //       } catch (error) {
-    //         console.log(error);
-    //       }
-    // },
     setWaiting: async function(key, value){
         try {
             // stores the data in the database
@@ -84,7 +63,7 @@ const redisDB = {
             console.log(error);
         }
     },
-    setTopic: async function(topic) {
+    setTopic: async function(topic, value) {
         // we can refactor this
         switch(topic) {
             case 'join':
@@ -102,12 +81,6 @@ const redisDB = {
             case 'TotalWaiting':
                 await this.setWaiting('waiting', value);
                 break;
-            // case 'TotalWaiting':
-            //     await this.incrementByOne('waiting');
-            //     break;
-            // case 'decrementTotalWaiting':
-            //     await this.decrementByOne('waiting');
-            //     break;
             default:
                 console.log('invalid topic');
                 break;
