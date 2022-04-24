@@ -5,6 +5,7 @@ const keys = ["join", "service", "complaint", "leave", "waiting"];
 // data expiration time 
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
+
 const redisDB = {
 
     setExpiresTime: function (key) {
@@ -24,31 +25,40 @@ const redisDB = {
         console.log('setExpiresTimeForAllKeys');
     },
     incrementByOne: async function(key){
+        console.log('************************');
         try {
             // check if the key exists
             const exists = await db.exists(key);
+            console.log('exists: ' + exists)
 
             if(!exists) {
-               // init the key
-               db.set(key, 0);  
+               // init the key and increaments
+               const bool = await db.set(key, 1);  
+               console.log('bool: ' + bool)
+               const existsNow = await db.exists(key);
+               console.log(`updated ${key} number: ` + 1);
+               console.log('existsNow: ' + existsNow)
             }
 
-            // gets the data
-            let value = await db.get(key);
-            console.log("current num: " + value);
+            else { //exists
+                // gets the data
+                let value = await db.get(key);
+                console.log("current num: " + value);
         
-            // increments and stores the updated data in the database
-            await db.set(key, ++value);
-            console.log(`updated ${key} number: ${value}`);
+                // increments and stores the updated data in the database
+                await db.set(key, ++value);
+                console.log(`updated ${key} number: ${value}`);
+            }
 
-            // // sets an expiration date for the data 
-            // this.setExpiresTime(key);
-            // console.log('set an expiration date'); 
+            // sets an expiration date for the data 
+            this.setExpiresTime(key);
+            console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
         }
     },
+
     setWaiting: async function(key, value){
         try {
             // stores the data in the database
