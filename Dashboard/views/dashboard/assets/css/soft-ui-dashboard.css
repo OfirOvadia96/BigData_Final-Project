@@ -330,9 +330,12 @@ figure {
   margin: 0 0 1rem;
 }
 
-img,
 svg {
   vertical-align: middle;
+}
+
+img {
+  padding-top: 8px;
 }
 
 table {
