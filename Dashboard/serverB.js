@@ -20,6 +20,7 @@ app.use(express.json());
 // //**NEED TO INIT AFTER 24 HOURS */
 // redis.initDB();
 
+
 //-------------Socket.io-------------------------
 io.on("connection", async (socket) => {
     //Get data from redis to dashboard
@@ -29,14 +30,30 @@ io.on("connection", async (socket) => {
     io.emit('allData', 
     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] , leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
 
+    // reset the data at midnight
+    // io.emit('resetData');
 });
+
+
+
+//reciveing data from dashboard
+io.on("connection", (socket) => {
+
+    socket.on('resetDB', function () {
+        console.log('*************recived a reset call**********************');
+        // reset redis
+        redis.initDB(); 
+    });
+});
+
+
 
 // ------------Consumer from Kafka-----------------
 kafka.consumer.on("data", async (msg) => {
     const newCall = JSON.parse(msg.value);
 
     // **Store the data in Redis and after send to Dashboard */
-
+  
 
     if(String(msg.value).length < 100) //Total wating calls
     {
@@ -57,10 +74,15 @@ kafka.consumer.on("data", async (msg) => {
 });
 
 
+
 //----------------Front Side - Daily Call Center ------------------
 
 app.get('/', function (req, res) {
     res.render(__dirname + '/views/dashboard/pages/dashboard');
+})
+
+app.get('/pages/dashboard.html', function (req, res) {
+    res.redirect('/');
 })
 
 // where style files will be
