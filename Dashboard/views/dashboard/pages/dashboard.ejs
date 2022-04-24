@@ -231,10 +231,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script> // functions 
 
-        function initSocket() {
+        //socket is global
+        const socket = io.connect();
 
-            //socket is global
-            const socket = io.connect();
+        function initSocket() {
 
             alert("connected");
 
@@ -266,12 +266,12 @@
               document.getElementById('totalcalls').innerHTML = 0;
               alert("THE DATA HAS BEEN RESET");
               
-              resetDB();
+              socket.emit('resetDB');
         }
 
-        function resetDB() {
-          socket.emit('resetDB');
-        }
+        // function resetDB() {
+        //   socket.emit('resetDB');
+        // }
 
 
   </script>

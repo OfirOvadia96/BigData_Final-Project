@@ -32,19 +32,26 @@ io.on("connection", async (socket) => {
 
     // reset the data at midnight
     // io.emit('resetData');
-});
-
-
-
-//reciveing data from dashboard
-io.on("connection", (socket) => {
 
     socket.on('resetDB', function () {
         console.log('*************recived a reset call**********************');
         // reset redis
         redis.initDB(); 
     });
+
 });
+
+
+
+// //reciveing data from dashboard
+// io.on("connection", (socket) => {
+
+//     socket.on('resetDB', function () {
+//         console.log('*************recived a reset call**********************');
+//         // reset redis
+//         redis.initDB(); 
+//     });
+// });
 
 
 
