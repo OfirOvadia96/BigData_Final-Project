@@ -11,11 +11,19 @@ const {faker} = require("@faker-js/faker");
 //     database: 'big_data'
 // });
 
+// var connection = mysql.createConnection({
+//   //Properties
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'Lior4007',
+//   database: 'big_data'
+// });
+
 var connection = mysql.createConnection({
   //Properties
   host: 'localhost',
   user: 'root',
-  password: 'Lior4007',
+  password: 'example',
   database: 'big_data'
 });
 
