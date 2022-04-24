@@ -190,7 +190,7 @@
                   <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                 </div>
               </div> -->
-              <h6 class="ms-2 mt-4 mb-0"> Average Waiting Time </h6>
+              <h6 class="ms-2 mt-4 mb-0"> Average Waiting Time For Calls</h6>
               <p class="text-sm ms-2">In the last 10 minutes </p>
               <div class="container border-radius-lg">
                 <div class="row">
@@ -198,13 +198,10 @@
                     <div class="d-flex mb-2">
 
                     </div>
-                    <h4 class="font-weight-bolder">0</h4>
+                    <h4 class="font-weight-bolder" id="averageTotalTime">0</h4>
                     <p class="text-xs mt-1 mb-0 font-weight-bold">Minutes</p>
                   </div>
              
-                  
-                 
-                  
                 </div>
               </div>
             </div>
@@ -251,6 +248,7 @@
               document.getElementById('leave').innerHTML = msg.leave;
               document.getElementById('totalwaitingcalls').innerHTML = msg.waiting;
               document.getElementById('totalcalls').innerHTML = parseInt(msg.join) + parseInt(msg.service) + parseInt(msg.complaint) + parseInt(msg.leave);
+              document.getElementById('averageTotalTime').innerHTML = msg.averageTotalTime;
             });
 
             //reset the redisDB
@@ -302,7 +300,7 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00","15:00"],
+        labels: ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00","17:00","18:00","19:00","20:00"],
         datasets: [{
             label: "Minutes",
             tension: 0.4,
@@ -312,7 +310,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke1,
             fill: true,
-            data: [5, 10, 15, 17, 20, 35,40,20,10,5,10,15],
+            data: [5, 10, 15, 17, 20, 35,40,20,10,5,10],
             maxBarThickness: 6
 
           },
