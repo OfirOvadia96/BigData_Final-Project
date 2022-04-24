@@ -11,7 +11,7 @@ const kafka = require("./models/comsumeKafka");
 
 const controllerRouter = require('./routes/controller'); //controller
 
-const port = 3000
+const port = 3245
 //http://localhost:3245
 
 //--------------Middleware------------------

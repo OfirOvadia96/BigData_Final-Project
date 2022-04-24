@@ -1,7 +1,7 @@
 const db = require('./connectRedis');
 
 // DB keys
-const keys = ["join", "service", "complaint", "leave", "waiting"];
+const keys = ["join", "service", "complaint", "leave", "waiting","averageTime"];
 // data expiration time 
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
@@ -104,7 +104,33 @@ const redisDB = {
         allData.push(await db.get('waiting'));
         console.log("Get all data from Redis!");
         return allData;
-    }
+    },
+    setAverageTime: async function(totaltime) {
+        // check if the key exists
+        const exists = await db.exists("averageTime");
+
+        if(!exists) {
+            // init the key
+            db.set("averageTime", 0);  
+        }
+       
+        let value = await db.get("averageTime");
+        await db.set("averageTime", value + totaltime);
+    },
+    getAverageTime: async function() {
+        // check if the key exists
+        const exists = await db.exists("averageTime");
+
+        if(!exists) {
+            // init the key
+            return 0; 
+        }
+       
+        let totalTime = await db.get("averageTime");
+        let calls = await db.get("join") + await db.get("service") + await db.get("complaint") + await db.get("leave");
+        
+        return (totalTime/calls)/60;
+    },
 }
 
 module.exports = redisDB;
