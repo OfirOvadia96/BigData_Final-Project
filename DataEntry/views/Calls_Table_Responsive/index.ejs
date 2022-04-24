@@ -144,14 +144,15 @@
 
 	<h1>Call Center</h1>
 	<br>
-	<img src="images/icons/phoneCall.jpg" alt="phoneCall" class="phoneicon">
+	<img src="images/icons/phoneCall.png" width="250" height="200" alt="phoneCall" class="center">
 	<br>
 
 	<!-- why body tag appears twice? -->
 
 	<body onload="initSocket()">
-		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls: <h2 class="counter"></h2>
+		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls:
 		</div>
+        <h2 class="counter"></h2>
 		<br>
 
 		<div class="d-grid gap-2 col-6 mx-auto text-center">
@@ -166,13 +167,12 @@
 
 		<br>
 		<br>
-		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg"/></div>
-		
+		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-success btn-lg"/></div>
+		<br>
 		<div class="limiter">
-			<div class="container-table100">
 				<div class="wrap-table100">
 					<div class="table100">
-						<table id="openConversations">
+						<table>
 							<thead>
 								<tr class="table100-head">
 									<th class="column1">ID</th>
@@ -189,15 +189,12 @@
 									<th class="column12">End</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									
-								</tr>
+							<tbody id="openConversations">
+								
 							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
 		</div>
 
 	</body>

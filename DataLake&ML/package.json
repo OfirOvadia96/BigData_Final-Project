@@ -6,6 +6,11 @@
         "json2csv": "^5.0.7",
         "mongoose": "^6.3.0",
         "node-rdkafka": "^2.12.0",
+        "nodemon": "^2.0.15",
         "socket.io": "^4.4.1"
+    },
+    "name": "server",
+    "scripts": {
+        "start": "nodemon serverA.js"
     }
 }
