@@ -5,21 +5,27 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
+
+    var join = 300
+    var service = 50
+    var complaint = 100
+    var leave = 20
+
     const data = {
       labels: [
-        'join',
-        'service',
-        'complaint',
-        'leave'
+        'Join',
+        'Service',
+        'Complaint',
+        'Leave'
       ],
       datasets: [{
         label: 'My First Dataset',
         data: [300, 50, 100, 20],
         backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'rgb(50,205,50)'
+        'rgb(50,205,50)', // green
+          'rgb(54, 162, 235)', // blue
+          'rgb(255, 205, 86)', // yellow
+          'rgb(255, 99, 132)' // light-red
         ],
         hoverOffset: 4
       }]
@@ -36,7 +42,7 @@
           },
           title: {
             display: true,
-            text: 'Chart.js Doughnut Chart'
+            text: 'Calls Type Distribution'
           }
         }
       },
