@@ -5,12 +5,17 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
-        target="_blank">
-        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Daily Call Center</span>
+      <a target="_blank">
+        <img src="../assets/img/logo-ct.jpeg"  class="border-radius-xl" width="250" height="200" alt="main_logo">
+        <!-- <br><br>
+        <span class="ms-1 font-weight-bold" style="padding-left: 20px;">Daily Call Center</span> -->
       </a>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
@@ -39,7 +44,7 @@
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
             <li class="nav-item">
-              <button type="button" class="btn btn-danger" onclick="resetInfo()">Reset Data</button>
+              <button type="button" class="btn btn-danger" style="margin-left: 30px; margin-top: 10px; text-transform: none !important; font-size: 15px;" onclick="resetInfo()">Reset Data</button>
           </a>
         </li>
       </ul>
@@ -70,7 +75,9 @@
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+
                     <img src="https://i.ibb.co/cTRKZ3y/join.png" width="27" height="27" style="margin-top: 10px;">
+    
                   </div>
                 </div>
               </div>
@@ -91,9 +98,11 @@
                   </div>
                 </div>
                 <div class="col-4 text-end">
+
                   <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                     <img src="https://i.ibb.co/Yjb6zv9/service.png" width="27" height="27" style="margin-top: 10px;">
                   </div>
+
                 </div>
               </div>
             </div>
@@ -113,8 +122,10 @@
                   </div>
                 </div>
                 <div class="col-4 text-end">
+
                   <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                     <img src="https://i.ibb.co/KNFtzhN/complaint.png" width="27" height="27" style="margin-top: 10px;">
+
                   </div>
                 </div>
               </div>
@@ -133,9 +144,11 @@
                   </div>
                 </div>
                 <div class="col-4 text-end">
+
                   <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                     <img src="https://i.ibb.co/1T031Xj/leave.png" width="27" height="27" style="margin-top: 10px;">
                   </div>
+
                 </div>
               </div>
             </div>
@@ -150,9 +163,11 @@
           <div class="col-md-6">
             <div class="card justify-content-center">
               <div class="card-header mx-4 p-3 text-center">
+
                 <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
                   <img src="https://i.ibb.co/12bX4Xt/calls.png" width="45" height="45" alt="waiting-icon" style="margin-top: 10px;">
                 </div>
+
               </div>
               <div class="card-body pt-0 p-3 text-center">
                 <h6 class="text-center mb-0">Total Number Of Calls</h6>
@@ -164,9 +179,11 @@
           <div class="col-md-6 mt-md-0 mt-4">
             <div class="card justify-content-center">
               <div class="card-header mx-4 p-3 text-center">
+
                 <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
                   <img src="https://i.ibb.co/8sptJSq/waiting.png" width="45" height="45" alt="waiting-icon" style="margin-top: 10px;">
                 </div>
+
               </div>
               
               <div class="card-body pt-0 p-3 text-center">
@@ -181,14 +198,41 @@
       
       <br>
 
+      <!-- <div class="col-md-8">
+        <div class="card">
+
+            <div class="header">
+                <h5 class="title">Number Calls By City</h5>
+                
+            </div>
+            <div class="content">
+                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                <div class="footer">
+                    <div class="legend">
+                        <i class="fa fa-circle text-info"></i> Open
+                        <i class="fa fa-circle text-danger"></i> Bounce
+                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                    </div>
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div> -->
+
       <div class="row mt-4">
         <div class="col-lg-5 mb-lg-0 mb-4">
           <div class="card z-index-2">
             <div class="card-body p-3">
+
               <div class="bg-gradient-primary border-radius-lg h-100">
                 <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-50 w-50 top-0 d-lg-block d-none" alt="waves">
                 <div class="position-relative d-flex align-items-center justify-content-center h-100">
                   <img class="w-100 position-relative z-index-2 pt-4" src="../assets/img/illustrations/rocket-white.png" alt="rocket" width="100" height="220">
+
                 </div>
               </div>
               <h6 class="ms-2 mt-4 mb-0"> Average Waiting Time For Calls</h6>
@@ -230,7 +274,7 @@
             <div class="col-12">
               <div class="card mb-4">
                 <div class="card-header pb-0">
-                  <h6>Last Calls</h6>
+                  <h3>Last Calls</h3>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                   <div class="table-responsive p-0">
@@ -252,20 +296,21 @@
                                 <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user1">-</h6>
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">-</p>
+                            <p class="text-xs font-weight-bold mb-0" id="phone-user1">-</p>
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">Online</span>
                           </td>
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">-</span>
+                            <span class="text-secondary text-xs font-weight-bold" id="topic-user1">-</span>
                           </td>
                         </tr>
+
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
@@ -273,22 +318,23 @@
                                 <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user1">-</h6>
                            
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">-</p>
+                            <p class="text-xs font-weight-bold mb-0" id="phone-user2">-</p>
                        
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-secondary">Offline</span>
                           </td>
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">-</span>
+                            <span class="text-secondary text-xs font-weight-bold" id="topic-user2">-</span>
                           </td>
                         </tr>
+
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
@@ -296,22 +342,23 @@
                                 <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user3">-</h6>
                                 
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">-</p>
+                            <p class="text-xs font-weight-bold mb-0" id="phone-user3">-</p>
                             
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">Online</span>
                           </td>
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">-</span>
+                            <span class="text-secondary text-xs font-weight-bold" id="topic-user3">-</span>
                           </td>
                         </tr>
+
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
@@ -319,43 +366,44 @@
                                 <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user4">-</h6>
                                 
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">-</p>
+                            <p class="text-xs font-weight-bold mb-0" id="phone-user4">-</p>
                             
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">Online</span>
                           </td>
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">-</span>
+                            <span class="text-secondary text-xs font-weight-bold" id="topic-user4">-</span>
                           </td>
                         </tr>
+
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
                               <div>
-                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
+                                <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user5">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user5">-</h6>
                                 
                               </div>
                             </div>
                           </td>
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">-</p>
+                            <p class="text-xs font-weight-bold mb-0" id="phone-user5">-</p>
                             
                           </td>
                           <td class="align-middle text-center text-sm">
                             <span class="badge badge-sm bg-gradient-success">Online</span>
                           </td>
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">-</span>
+                            <span class="text-secondary text-xs font-weight-bold" id="topic-user5">-</span>
                           </td>
                         </tr>
                       </tbody>
@@ -393,6 +441,23 @@
               document.getElementById('averageTotalTime').innerHTML = msg.averageTotalTime || 0;
             });
 
+            //Recive call details for put in last calls
+            socket.on('NewCall', function (msg) {
+                
+                for(let i=1 ; i <= 4 ; i++){
+
+                  document.getElementById('name-user'+(i+1)) = document.getElementById('name-user'+i).value;
+                  document.getElementById('phone-user'+(i+1)) = document.getElementById('name-user'+i).value;
+                  document.getElementById('topic-user'+(i+1)) = document.getElementById('name-user'+i).value;
+
+                }
+                
+                document.getElementById('name-user1').innerHTML = msg.firstname + " " + msg.lastname;
+                document.getElementById('phone-user1').innerHTML = msg.phone;
+                document.getElementById('topic-user1').innerHTML = msg.topic;
+
+            });
+            
         }
 
         function resetInfo() {
@@ -401,6 +466,43 @@
 
 
   </script>
+
+ <!-- Core JS Files   -->
+ <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+ <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+ <!--  Charts Plugin -->
+ <script src="assets/js/chartist.min.js"></script>
+
+   <!--  Notifications Plugin    -->
+   <!-- <script src="assets/js/bootstrap-notify.js"></script> -->
+
+   <!--  Google Maps Plugin    -->
+   <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+
+   <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+ <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+ <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+ <script src="assets/js/demo.js"></script>
+
+ <script type="text/javascript">
+     $(document).ready(function(){
+
+         demo.initChartist();
+
+         $.notify({
+             icon: 'pe-7s-gift',
+             message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+           },{
+               type: 'info',
+               timer: 4000
+           });
+
+     });
+ </script>
+
 
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
