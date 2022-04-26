@@ -1,0 +1,46 @@
+<script> // functions 
+
+    //socket is global
+    const socket = io.connect();
+
+    function initSocket() {
+
+      alert("connected");
+
+      //Recive new call from kafka consume
+      socket.on('allData', function (msg) {
+
+        document.getElementById('join').innerHTML = msg.join || 0;
+        document.getElementById('service').innerHTML = msg.service || 0;
+        document.getElementById('complaint').innerHTML = msg.complaint || 0;
+        document.getElementById('leave').innerHTML = msg.leave || 0;
+        document.getElementById('totalwaitingcalls').innerHTML = msg.waiting || 0;
+        document.getElementById('totalcalls').innerHTML = parseInt(msg.join) + parseInt(msg.service) + parseInt(msg.complaint) + parseInt(msg.leave) || 0;
+        document.getElementById('averageTotalTime').innerHTML = msg.averageTotalTime || 0;
+      });
+
+      //Recive call details for put in last calls
+      socket.on('NewCall', function (msg) {
+
+        for (let i = 1; i <= 4; i++) {
+
+          document.getElementById('name-user' + (i + 1)) = document.getElementById('name-user' + i).value;
+          document.getElementById('phone-user' + (i + 1)) = document.getElementById('name-user' + i).value;
+          document.getElementById('topic-user' + (i + 1)) = document.getElementById('name-user' + i).value;
+
+        }
+
+        document.getElementById('name-user1').innerHTML = msg.firstname + " " + msg.lastname;
+        document.getElementById('phone-user1').innerHTML = msg.phone;
+        document.getElementById('topic-user1').innerHTML = msg.topic;
+
+      });
+
+    }
+
+    function resetInfo() {
+      socket.emit('resetDB');
+    }
+
+
+  </script>
