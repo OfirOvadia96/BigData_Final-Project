@@ -12,6 +12,7 @@ const callDetailsSchema = new mongoose.Schema({
   prevCalls: Number,
   totalTime: Number,
   product: String,
+  period: String,
   topic: String,
 },
 {versionKey: false});

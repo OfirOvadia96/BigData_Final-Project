@@ -13,7 +13,7 @@ const MongoDB = {
     export2csv: async function () {
         Collection.find({},{_id:0}).lean().exec((err, data) => {
             if (err) throw err;
-            const csvFields = ['id','firstName','lastName','phone','city', 'gender', 'age','prevCalls','totalTime','product','topic']
+            const csvFields = ['id','firstName','lastName','phone','city', 'gender', 'age','prevCalls','totalTime','product', 'period','topic']
             console.log(csvFields);
             const json2csvParser = new Json2csvParser({
                 csvFields
