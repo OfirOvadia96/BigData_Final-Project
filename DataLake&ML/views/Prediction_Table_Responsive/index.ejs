@@ -48,12 +48,8 @@
 
 <body>
 	<h1>Topic Prediction</h1>
-	<br>
-	<br>
+	<img src="./images/bigMllogo.png" width="250" height="200" alt="bigml" class="pic">
 
-
-	<!-- <h3 id="call"></h3> -->
-	<br>
 	<!--===============================================================================================-->
 	<body onload="initSocket()">
 
@@ -74,7 +70,7 @@
 				document.getElementById("column6").innerHTML = msg.gender;
 				document.getElementById("column7").innerHTML = msg.age;
 				document.getElementById("column8").innerHTML = msg.prevcalls;
-				document.getElementById("topic").innerHTML = "-";
+				document.getElementById("topic").innerHTML = "???";
 
                 // document.getElementById('call').innerHTML = 
                 // 'Current call: First Name: ' + msg.firstname + ' | Last Name: ' + msg.lastname + ' | Phone: '+ msg.phone
@@ -89,9 +85,9 @@
     </body>
 	<!--===============================================================================================-->
 	
-
+	<br>
 	<div class="limiter">
-		<div class="container-table100">
+	
 			<div class="wrap-table100">
 
 				<div class="table100">
@@ -117,17 +113,15 @@
 								<th class="column6" id="column6">-</th>
 								<th class="column7" id="column7">-</th>
 								<th class="column8" id="column8">-</th>
-								<th class="column9-data" id="topic">-</th>
+								<th class="column9-data" id="topic">???</th>
 							</tr>
 
 						</tbody>
 					</table>
 				</div>
 			</div>
-		</div>
+		
 	</div>
-
-	<img src="./images/bigMllogo.png" alt="bigml" class="pic">
 
 		<!--===============================================================================================-->
 		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

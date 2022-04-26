@@ -33,7 +33,7 @@
         }
 
         var countCalls = 0;
-        var rows = JSON.stringify(data)
+        var rows = <%-JSON.stringify(data)%>;
 
         function randomPerson(){
             var min = 0;
@@ -80,10 +80,10 @@
             cAge.innerHTML = `<div id=${person.age}>${person.age}</div>`;
             cPrevCalls.innerHTML = `<div id=${randomPrevCalls}>${randomPrevCalls}</div>`;;
             cStart.innerHTML = "<div id='" + date + "''>" + `${day}-${month}-${year} ,${hour}:${minute}` + "</div>";
-            cProduct.innerHTML = "<select><option value='internet'>אינטרנט ביתי</option><option value='cables'>כבלים</option><option value='cellular'>סלולרי</option><option value='all'>כולם</option></select>";
-            cTopic.innerHTML = "<select><option value='join'>הצטרפות</option><option value='service'>שירות</option><option value='complaint'>תלונה</option><option value='leave'>בקשת ניתוק</option></select>";
-            cEnd.innerHTML = "<button onclick='reportEndCall(this.parentNode.parentNode)'>סיום</button>";
-            
+            cProduct.innerHTML = "<select><option value='internet'>Internet</option><option value='cables'>Cables</option><option value='cellular'>Cellular</option><option value='all'>All</option></select>";
+            cTopic.innerHTML = "<select><option value='join'>Join</option><option value='service'>Service</option><option value='complaint'>Complaint</option><option value='leave'>Leave</option></select>";
+            cEnd.innerHTML = "<button onclick='reportEndCall(this.parentNode.parentNode)' class='btn btn-danger'>Hang Up</button>";
+        
             var message = {};
             message.id = person.id;
             message.firstName = person.first_name;
@@ -93,6 +93,7 @@
             message.gender = person.gender;
             message.age = person.age;
             message.prevCalls = randomPrevCalls;
+            message.getElementsByTagName('select')[0].value
             
             //Send to socket the call details without topic (to predict in BigML)
             socket.emit("callDetails", message);
@@ -120,8 +121,9 @@
             var startcall = row.cells[8].getElementsByTagName('div')[0].id;
             message.totalTime = (parseInt(Date.now()) - parseInt(startcall)) / 1000; // seconds
             message.product = (row.cells[9].getElementsByTagName('select')[0].value);
+            message.period = document.getElementById("period").value;
             message.topic = (row.cells[10].getElementsByTagName('select')[0].value);
-            
+
             //Send to socket the call details
             socket.emit("callDetails", message);
             deleteRow(row);
@@ -144,32 +146,32 @@
 
 	<h1>Call Center</h1>
 	<br>
-	<img src="images/icons/phoneCall.jpg" alt="phoneCall" class="phoneicon">
+	<img src="images/icons/phoneCall.png" width="250" height="200" alt="phoneCall" class="center">
 	<br>
 
 	<!-- why body tag appears twice? -->
 
 	<body onload="initSocket()">
-		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls: <h2 class="counter"></h2>
+		<div type="number" id="total" min="0" max="200" value="0" class="NumberTitle">Total Waiting calls:
 		</div>
+        <h2 class="counter"></h2>
 		<br>
 
 		<div class="d-grid gap-2 col-6 mx-auto text-center">
 			<input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" />
 		
 			&nbsp;
-			<select class="selectSpinner">
-				<option value='Emergency'>Holidays</option>
-				<option>Summer Vacations</option>
-				<option>Ordinary Days</option>
+			<select class="selectSpinner" id="period">
+				<option value='Holidays'>Holidays</option>
+				<option value="Summer Vacations">Summer Vacations</option>
+				<option value="Ordinary Days">Ordinary Days</option>
 			</select>
 
 		<br>
 		<br>
-			<input type="button" onclick="NewCall()" value="New Call" class="btn btn-primary btn-lg"/>        </div>
-		
+		<input type="button" onclick="NewCall()" value="New Call" class="btn btn-success btn-lg"/></div>
+		<br>
 		<div class="limiter">
-			<div class="container-table100">
 				<div class="wrap-table100">
 					<div class="table100">
 						<table>
@@ -189,98 +191,12 @@
 									<th class="column12">End</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-								</tr>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-								</tr>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-								</tr>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-								</tr>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-								</tr>
-								<tr>
-									<th class="column1">316749586</th>
-									<th class="column2">Avi</th>
-									<th class="column3">Nimni</th>
-									<th class="column4">052-5744624</th>
-									<th class="column5">Tel-Aviv</th>
-									<th class="column6">Male</th>
-									<th class="column7">42</th>
-									<th class="column8">8</th>
-									<th class="column9">16:23</th>
-									<th class="column10">Internet</th>
-									<th class="column11">Issue</th>
-									<th class="column12"><button type="button" class="btn btn-danger">Hang Up</button></th>
-									
-								</tr>
-
+							<tbody id="openConversations">
+								
 							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
 		</div>
 
 	</body>

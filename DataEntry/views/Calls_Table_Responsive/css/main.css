@@ -5,8 +5,12 @@
 
 
 @font-face {
-  font-family: OpenSans-Regular;
+  font-family: Arial, Helvetica, sans-serif;
   src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -21,7 +25,7 @@
 
 body, html {
 	height: 100%;
-	font-family: sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
   background-image: #c850c0;
   background-image: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
   background-image: -o-linear-gradient(45deg, #4158d0, #c850c0);
@@ -46,15 +50,16 @@ body, html {
 }
 .NumberTitle{
   text-align: center;
-  color: darkred;
+  color: white;
   font-size: 40px;
-  font-family: Georgia, serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .counter{
   text-align: center;
+  margin-left: 15px;
   font-size: 50px;
-  color: red;
+  color: white;
 }
 
 .selectSpinner{
@@ -81,8 +86,8 @@ a:hover {
 }
 
 /* ------------------------------------ */
-h1 {
-  font-family: Georgia, serif;
+h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
   font-size: 100px;
   line-height: 1em;
@@ -173,6 +178,14 @@ iframe {
 
 .wrap-table100 {
   width: 1170px;
+  margin: auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 50%; */
 }
 
 table {
@@ -216,7 +229,7 @@ table td.r, table th.r {
 
 
 .table100-head th{
-  font-family: OpenSans-Regular;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #fff;
   line-height: 1.2;
@@ -228,7 +241,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
-  font-family: OpenSans-Regular;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   color: #808080;
   line-height: 1.2;
@@ -242,49 +255,49 @@ tbody tr:hover {
 }
 
 .column1 {
-  width: 160px;
+  width: 200px;
   padding-left: 40px;
   text-align: left;
 }
 
 .column2 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column3 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column4 {
-  width: 260px;
+  width: 200px;
   text-align: left;
 }
 
 .column5 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column6 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column7 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column8 {
   width: 160px;
-  text-align: left;
+  text-align: center;
 }
 
 .column9 {
-  width: 160px;
-  text-align: left;
+  width: 500px;
+  text-align: center;
 }
 
 .column10 {
@@ -293,12 +306,12 @@ tbody tr:hover {
 }
 
 .column11 {
-  width: 160px;
+  width: 200px;
   text-align: left;
 }
 
 .column12 {
-  width: 160px;
+  width: 200px;
   text-align: left;
   padding-right: 40px;
 }
@@ -326,7 +339,7 @@ tbody tr:hover {
     margin-bottom: 0;
   }
   table tbody tr td:before {
-    font-family: OpenSans-Regular;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #999999;
     line-height: 1.2;
@@ -377,6 +390,7 @@ tbody tr:hover {
 
 @media (max-width: 576px) {
   .container-table100 {
+    max-width: 700px;
     padding-left: 15px;
     padding-right: 15px;
   }
