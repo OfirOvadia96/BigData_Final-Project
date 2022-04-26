@@ -27,10 +27,10 @@
             alert("connected");
         }
 
-        //Send to socket the current waiting calls
-        function sendMessage(total) {
-            socket.emit("totalWaitingCalls",total);
-        }
+        // //Send to socket the current waiting calls
+        // function sendMessage(total) {
+        //     socket.emit("totalWaitingCalls",total);
+        // }
 
         var countCalls = 0;
         var rows = <%-JSON.stringify(data)%>;
@@ -93,7 +93,6 @@
             message.gender = person.gender;
             message.age = person.age;
             message.prevCalls = randomPrevCalls;
-            message.getElementsByTagName('select')[0].value
             
             //Send to socket the call details without topic (to predict in BigML)
             socket.emit("callDetails", message);
@@ -137,6 +136,8 @@
             countCalls--;
             var counter = document.querySelector('.counter');
             counter.innerHTML = countCalls;
+            //Sent to socket the total waiting calls
+            socket.emit("totalWaitingCalls",countCalls);
         }
     </script>
 	<!--===============================================================================================-->
@@ -158,9 +159,9 @@
 		<br>
 
 		<div class="d-grid gap-2 col-6 mx-auto text-center">
-			<input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" />
+			<!-- <input type="button" value="Set" onclick="sendMessage(total.value)" class="btn btn-dark btn-lg" /> -->
+            <h5 style="color:white;">Period: </h5>
 		
-			&nbsp;
 			<select class="selectSpinner" id="period">
 				<option value='Holidays'>Holidays</option>
 				<option value="Summer Vacations">Summer Vacations</option>
@@ -174,7 +175,7 @@
 		<div class="limiter">
 				<div class="wrap-table100">
 					<div class="table100">
-						<table>
+						<table id="openConversations">
 							<thead>
 								<tr class="table100-head">
 									<th class="column1">ID</th>
@@ -191,8 +192,8 @@
 									<th class="column12">End</th>
 								</tr>
 							</thead>
-							<tbody id="openConversations">
-								
+							<tbody>
+								<tr></tr>
 							</tbody>
 						</table>
 					</div>
