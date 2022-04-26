@@ -244,7 +244,7 @@
 
                     </div>
                     <h4 class="font-weight-bolder" id="averageTotalTime">0</h4>
-                    <p class="text-xs mt-1 mb-0 font-weight-bold">Minutes</p>
+                    <p class="text-xs mt-1 mb-0 font-weight-bold">Seconds</p>
                   </div>
              
                 </div>
@@ -283,7 +283,7 @@
                         <tr>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Full Name</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Phone</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Time Call (Seconds)</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Topic</th>
                           <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -304,7 +304,7 @@
                             <p class="text-xs font-weight-bold mb-0" id="phone-user1">-</p>
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                            <span class="badge badge-sm bg-gradient-success" id="time-user1">-</span>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold" id="topic-user1">-</span>
@@ -318,7 +318,7 @@
                                 <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm" id="name-user1">-</h6>
+                                <h6 class="mb-0 text-sm" id="name-user2">-</h6>
                            
                               </div>
                             </div>
@@ -328,7 +328,7 @@
                        
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                            <span class="badge badge-sm bg-gradient-success" id="time-user2">-</span>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold" id="topic-user2">-</span>
@@ -352,7 +352,7 @@
                             
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                            <span class="badge badge-sm bg-gradient-success" id="time-user3">-</span>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold" id="topic-user3">-</span>
@@ -376,7 +376,7 @@
                             
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                            <span class="badge badge-sm bg-gradient-success" id="time-user4">-</span>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold" id="topic-user4">-</span>
@@ -400,7 +400,7 @@
                             
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                            <span class="badge badge-sm bg-gradient-success" id="time-user5">-</span>
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold" id="topic-user5">-</span>
@@ -422,40 +422,46 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script> // functions 
 
-        //socket is global
-        const socket = io.connect();
+        let socket;
 
         function initSocket() {
+            //socket is global
+             socket = io.connect();
 
             alert("connected");
 
-            //Recive new call from kafka consume
-            socket.on('allData', function (msg) { 
-              
-              document.getElementById('join').innerHTML = msg.join || 0;
-              document.getElementById('service').innerHTML = msg.service || 0;
-              document.getElementById('complaint').innerHTML = msg.complaint || 0;
-              document.getElementById('leave').innerHTML = msg.leave || 0;
-              document.getElementById('totalwaitingcalls').innerHTML = msg.waiting || 0;
-              document.getElementById('totalcalls').innerHTML = parseInt(msg.join) + parseInt(msg.service) + parseInt(msg.complaint) + parseInt(msg.leave) || 0;
-              document.getElementById('averageTotalTime').innerHTML = msg.averageTotalTime || 0;
-            });
-
             //Recive call details for put in last calls
-            socket.on('NewCall', function (msg) {
-                
-                for(let i=1 ; i <= 4 ; i++){
+            socket.on('New_Call', function (msg) {
 
-                  document.getElementById('name-user'+(i+1)) = document.getElementById('name-user'+i).value;
-                  document.getElementById('phone-user'+(i+1)) = document.getElementById('name-user'+i).value;
-                  document.getElementById('topic-user'+(i+1)) = document.getElementById('name-user'+i).value;
+                for(let i=4 ; i >= 1 ; i--){
+
+                  document.getElementById('name-user' + (i+1)).innerHTML = document.querySelector('#name-user' + i).textContent;
+                  document.getElementById('phone-user'+ (i+1)).innerHTML = document.querySelector('#phone-user' + i).textContent;
+                  document.getElementById('time-user'+ (i+1)).innerHTML = document.querySelector('#time-user' + i).textContent;
+                  document.getElementById('topic-user'+ (i+1)).innerHTML = document.querySelector('#topic-user' + i).textContent;
 
                 }
                 
                 document.getElementById('name-user1').innerHTML = msg.firstname + " " + msg.lastname;
                 document.getElementById('phone-user1').innerHTML = msg.phone;
+                document.getElementById('time-user1').innerHTML = msg.totaltime;
                 document.getElementById('topic-user1').innerHTML = msg.topic;
 
+                // console.log("VALUEEE: " + document.querySelector('#name-user1').textContent);
+                
+
+            });
+
+            //Recive new call from kafka consume
+            socket.on('allData', function (msg) { 
+
+              document.getElementById('join').innerHTML = msg.join;
+              document.getElementById('service').innerHTML = msg.service;
+              document.getElementById('complaint').innerHTML = msg.complaint;
+              document.getElementById('leave').innerHTML = msg.leave;
+              document.getElementById('totalwaitingcalls').innerHTML = msg.waiting;
+              document.getElementById('totalcalls').innerHTML = parseInt(msg.join) + parseInt(msg.service) + parseInt(msg.complaint) + parseInt(msg.leave);
+              document.getElementById('averageTotalTime').innerHTML = msg.averageTotalTime;
             });
             
         }
@@ -468,11 +474,11 @@
   </script>
 
  <!-- Core JS Files   -->
- <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
- <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+ <!-- <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script> -->
+ <!-- <script src="assets/js/bootstrap.min.js" type="text/javascript"></script> -->
 
- <!--  Charts Plugin -->
- <script src="assets/js/chartist.min.js"></script>
+  <!-- Charts Plugin
+ <script src="assets/js/chartist.min.js"></script> -->
 
    <!--  Notifications Plugin    -->
    <!-- <script src="assets/js/bootstrap-notify.js"></script> -->
@@ -481,12 +487,12 @@
    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
 
    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
- <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+ <!-- <script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script> -->
 
- <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
- <script src="assets/js/demo.js"></script>
+ <!-- Light Bootstrap Table DEMO methods, don't include it in your project!
+ <script src="assets/js/demo.js"></script> -->
 
- <script type="text/javascript">
+ <!-- <script type="text/javascript">
      $(document).ready(function(){
 
          demo.initChartist();
@@ -501,7 +507,7 @@
            });
 
      });
- </script>
+ </script> -->
 
 
   <script src="../assets/js/core/popper.min.js"></script>
