@@ -11,6 +11,6 @@
     },
     "name": "server",
     "scripts": {
-        "start": "nodemon serverA.js"
+        "start": "nodemon serverC.js"
     }
 }
