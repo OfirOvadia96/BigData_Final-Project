@@ -26,32 +26,32 @@
                   <img src="../assets/img/shapes/waves-white.svg"
                     class="position-absolute h-50 w-50 top-0 d-lg-block d-none" alt="waves">
                   <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                    <img class="w-100 position-relative z-index-2 pt-4"
-                      src="../assets/img/illustrations/rocket-white.png" alt="rocket" width="100" height="220">
+                    <!-- <img class="w-100 position-relative z-index-2 pt-4"
+                      src="../assets/img/illustrations/rocket-white.png" alt="rocket" width="100" height="220"> -->
                   </div>
 
 
                 </div>
-                <!-- Average Waiting Time For Calls: In the last 10 minutes-->
-                <%- include("partials/avg-waiting-time-ten-min-chart"); %>
+
+                <!-- <div class="card" style="width: 25rem;"> -->
+                  <div class="card-body" style="width: 400px; height: 400px;">
+                    <!-- calls type distribution doughnut chart-->
+                    <%- include("partials/calls-distribution-doughnut-chart"); %>
+                  </div>
+                <!-- </div> -->
+
+                <!-- Average Waiting Time For Calls: In the last 10 minutes
+                <%- include("partials/avg-waiting-time-ten-min-chart"); %> -->
               </div>
             </div>
           </div>
 
-
-          <div class="card" style="width: 35rem;">
-            <div class="card-body">
-              <!-- calls type distribution doughnut chart-->
-              <%- include("partials/calls-distribution-doughnut-chart"); %>
-            </div>
-          </div>
-
-
-          <!-- Average Waiting Time: All day long - every hour-->
-          <%- include("partials/avg-waiting-time-hour-chart"); %>
+            <!-- Average Waiting Time: All day long - every hour-->
+            <%- include("partials/avg-waiting-time-hour-chart"); %>
 
             <!-- last calls table -->
             <%- include("partials/last-calls-table"); %>
+
 
         </div>
 
@@ -62,7 +62,7 @@
     <%- include("partials/socket"); %>
 
       <!-- credits -->
-      <%- include("partials/credits"); %>
+      <!-- <%- include("partials/credits"); %> -->
 
       <!-- footer -->
       <%- include("partials/footer"); %>
