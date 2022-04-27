@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
 var server = require('http').createServer(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+    allowEIO3: true // false by default
+});
 var db = require('./models/mysql');
-const kafka = require("../MessageBroker/publish");
+const kafka = require("./models/produceKafka");
 const controllerRouter = require('./routes/controller'); //controller
 
 const port = 3025
+
 
 const bodyParser = require('body-parser');
 

@@ -1,15 +1,23 @@
 const db = require('./connectRedis');
 
 // DB keys
-const keys = ["join", "service", "complaint", "leave", "waiting","averageTime"];
+const keys = ["join", "service", "complaint", "leave", "waiting","averageTime","Jerusalem",
+                "Nahariya","Haifa","Tel_Aviv","Ashdod","Ashkelon","Beer_Sheva"];
+
+
 // data expiration time 
 const todayEnd = new Date().setHours(23, 59, 59, 999);
 
 const redisDB = {
 
-    setExpiresTime: function (key) {
-        // sets an expiration date for the data 
-        db.expireat(key, parseInt(todayEnd / 1000));
+    setExpiresTime: function () {
+        keys.forEach(element => {
+            if(db.exists(element)){
+                // sets an expiration date for the data 
+                db.expireat(element, parseInt(todayEnd / 1000));
+            }
+        });
+        console.log('set an expiration date!'); 
     },
 
     initDB: async function() {
@@ -17,13 +25,6 @@ const redisDB = {
             db.set(key, 0);
         });
         console.log('initDB');
-    },
-
-    setExpiresTimeForAllKeys: function () {
-        keys.forEach(key => {
-            this.setExpiresTime(key);
-        });
-        console.log('setExpiresTimeForAllKeys');
     },
 
     incrementByOne: async function(key){
@@ -46,10 +47,6 @@ const redisDB = {
                 await db.set(key, ++value);
                 console.log(`updated ${key} number: ${value}`);
             }
-
-            // // sets an expiration date for the data 
-            // this.setExpiresTime(key);
-            // console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
@@ -61,10 +58,6 @@ const redisDB = {
             // stores the data in the database
             await db.set(key, value);
             console.log(`updated ${key} number: ${value}`);
-
-            // // sets an expiration date for the data 
-            // this.setExpiresTime(key);
-            // console.log('set an expiration date'); 
         
         } catch (error) {
             console.log(error);
@@ -95,13 +88,54 @@ const redisDB = {
             }
     },
 
+    setCity: async function (city){
+        switch(city) {
+            case 'Jerusalem':
+                await this.incrementByOne('Jerusalem');
+                break;
+            case 'Nahariya':
+                await this.incrementByOne('Nahariya');
+                break;
+            case 'Haifa':
+                await this.incrementByOne('Haifa');
+                break;
+            case 'Tel-Aviv':
+                await this.incrementByOne('Tel_Aviv');
+                break;
+            case 'Ashdod':
+                await this.incrementByOne('Ashdod');
+                break;
+            case 'Ashkelon':
+                await this.incrementByOne('Ashkelon');
+                break;
+            case 'Beer-Sheva':
+                await this.incrementByOne('Beer_Sheva');
+                break;
+            default:
+                console.log('invalid City');
+                break;
+            }
+    },
+
     getAllData: async function() {
         let allData = [];
+
+        //Topic + waiting
         allData.push(await db.get('join'));
         allData.push(await db.get('service'));
         allData.push(await db.get('complaint'));
         allData.push(await db.get('leave'));
         allData.push(await db.get('waiting'));
+
+        //Cities
+        allData.push(await db.get('Jerusalem'));
+        allData.push(await db.get('Nahariya'));
+        allData.push(await db.get('Haifa'));
+        allData.push(await db.get('Tel_Aviv'));
+        allData.push(await db.get('Ashdod'));
+        allData.push(await db.get('Ashkelon'));
+        allData.push(await db.get('Beer_Sheva'));
+        
         console.log("Get all data from Redis!");
         return allData;
     },
@@ -129,7 +163,8 @@ const redisDB = {
         }
        
         let totalTime = await db.get("averageTime");
-        let calls = parseInt(await db.get("join")) + parseInt(await db.get("service")) + parseInt(await db.get("complaint")) + parseInt(await db.get("leave"));
+        let calls = parseInt(await db.get("join")) + parseInt(await db.get("service")) + 
+                    parseInt(await db.get("complaint")) + parseInt(await db.get("leave"));
         
         return ((parseInt(totalTime)/calls)).toFixed(4);
     },
