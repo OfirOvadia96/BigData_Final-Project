@@ -10,6 +10,7 @@ const todayEnd = new Date().setHours(23, 59, 59, 999);
 
 const redisDB = {
 
+    //Delete all keys in end of the day
     setExpiresTime: function () {
         keys.forEach(element => {
             if(db.exists(element)){
@@ -20,6 +21,7 @@ const redisDB = {
         console.log('set an expiration date!'); 
     },
 
+    //Init all keys
     initDB: async function() {
         keys.forEach(key => {
             db.set(key, 0);
@@ -27,6 +29,7 @@ const redisDB = {
         console.log('initDB');
     },
 
+    //Increase valus of specific key
     incrementByOne: async function(key){
         
         try {
@@ -37,6 +40,7 @@ const redisDB = {
                // init the key and increaments
                await db.set(key, 1);  
                console.log(`updated ${key} number: ` + 1);
+            
             }
 
             else { //exists
@@ -53,6 +57,7 @@ const redisDB = {
         }
     },
 
+    //Set number of waiting calls
     setWaiting: async function(key, value){
         try {
             // stores the data in the database
@@ -64,6 +69,7 @@ const redisDB = {
         }
     },
 
+    //Increase number of specific topic / Set number of waiting calls
     setTopic: async function(topic, value) {
         // we can refactor this
         switch(topic) {
@@ -87,7 +93,8 @@ const redisDB = {
                 break;
             }
     },
-
+    
+    //Increase value of specific city
     setCity: async function (city){
         switch(city) {
             case 'Jerusalem':
@@ -144,11 +151,16 @@ const redisDB = {
         // check if the key exists
         const exists = await db.exists("averageTime");
 
+        //First time / After init
         if(!exists) {
             // init the key
             db.set("averageTime", 0);  
+
+            //Reset each 10 minutes
+            setTimeout(db.set("averageTime", 0), 600000);
         }
-       
+        
+        //Current time is in seconds
         let value = await db.get("averageTime");
         await db.set("averageTime", value + totaltime);
     },
@@ -166,7 +178,7 @@ const redisDB = {
         let calls = parseInt(await db.get("join")) + parseInt(await db.get("service")) + 
                     parseInt(await db.get("complaint")) + parseInt(await db.get("leave"));
         
-        return ((parseInt(totalTime)/calls)).toFixed(4);
+        return ((parseInt(totalTime)/calls)/60).toFixed(3); //In minutes
     },
 }
 
