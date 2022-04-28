@@ -3,18 +3,19 @@
 
 <h3>introduction:</h3>
 
-***In the current period, in addition to data extracted from operational systems, many data are located and collected from a variety of sources as a basis for analysis, formulation of insights, adoption of strategies and evidence-based decision making.
-"Analytics Data Big" systems require a lot of organizational resources and therefore using cloud service providers for storage and processing is a common practice.
-In designing a distributed system of this type, there is no impediment to weaving a variety of services from several
-Providers, combining services sourced from the organization itself, into a complete solution.
-In the current project we have created a solution for processing and displaying data inspired by the "Lambda" template***
+***Today, in addition to data from operational systems, data is also gathered from multiple sources as the basis for analysis, formulation of insights, implementation of strategies, and evidence-based decision making. Big data analytics systems are resource-intensive resources and therefore cloud services are a common option for storing and processing the data. In designing such a system, a variety of services from several Providers may be combined, including services provided by the organization itself, into a comprehensive solution.***
 
 
-<h4>The essence of the solution:</h4>
+<h4>Our solution:</h4>
 
-***A system built from three subsystems that together enable monitoring of incoming calls to the Center Call in a "Near Real Time" approach and using a dashboard that displays key metrics, and allows early call type classification to route the nature of the call recommended to the answering provider.***
+***We developed a solution based on the <a href="https://databricks.com/glossary/lambda-architecture">lambda architecture</a> for storing, processing and displaying data.
+The system consists of three subsystems that combine to allow monitoring of incoming calls in "Near Real Time", providing a dashboard that displays key metrics, and enabling early call type classification for the answering provider to route the call appropriately.***
 
 <br>
+
+<p align="center">
+  <img src="https://i.ibb.co/3rS99bN/Screen-Shot-2022-04-28-at-23-26-36.png" width="600" title="hover text">
+</p>
 
 
 <h2 align = "center">Running the project</h2>
@@ -29,7 +30,7 @@ In the current project we have created a solution for processing and displaying 
   
   ii. SQL image (optional) / [mySQL workbench](https://www.mysql.com/downloads/)
   
-  iii.MongoDB image (optional) / [MongoDB compass](https://www.mongodb.com/)
+  iii. MongoDB image (optional) / [MongoDB compass](https://www.mongodb.com/)
 
 <h3>Use the following cloud services:</h3>
 
