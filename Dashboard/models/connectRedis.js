@@ -1,7 +1,4 @@
 const redis = require('ioredis');
-const ENV_PATH =  'C:\Lioz\BigData-Final-Project\.env'
-require('dotenv').config({ path: ENV_PATH})
-// console.log('process.env.REDIS_AUTH: ' + process.env.REDIS_AUTH) 
 
 const conn = {
     port: 6379,
