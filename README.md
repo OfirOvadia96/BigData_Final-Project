@@ -1,8 +1,8 @@
 <h1 align="center"> BigData-Final-Project </h1>
 </p>
 
-<h2 align = "center">Overview</h2>
 
+<h3> Overview </h3>
 
 ***We developed a solution based on the <a href="https://databricks.com/glossary/lambda-architecture">lambda architecture</a> for storing, processing and displaying data.
 The system consists of three subsystems that combine to allow monitoring of incoming calls in "Near Real Time", providing a dashboard that displays key metrics, and enabling early call type classification for the answering provider to route the call appropriately.***
