@@ -1,12 +1,7 @@
 <h1 align="center"> BigData-Final-Project </h1>
 </p>
 
-<h3>introduction:</h3>
-
-***Today, in addition to data from operational systems, data is also gathered from multiple sources as the basis for analysis, formulation of insights, implementation of strategies, and evidence-based decision making. Big data analytics systems are resource-intensive resources and therefore cloud services are a common option for storing and processing the data. In designing such a system, a variety of services from several Providers may be combined, including services provided by the organization itself, into a comprehensive solution.***
-
-
-<h4>Our solution:</h4>
+<h4>Overview:</h4>
 
 ***We developed a solution based on the <a href="https://databricks.com/glossary/lambda-architecture">lambda architecture</a> for storing, processing and displaying data.
 The system consists of three subsystems that combine to allow monitoring of incoming calls in "Near Real Time", providing a dashboard that displays key metrics, and enabling early call type classification for the answering provider to route the call appropriately.***
