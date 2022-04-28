@@ -1,8 +1,22 @@
-<h1> BigData-Final-Project </h1>
+<h1 align="center"> BigData-Final-Project </h1>
 </p>
 
+<h3>introduction:</h3>
 
-<h3> Project Structure: </h3>
+***In the current period, in addition to data extracted from operational systems, many data are located and collected from a variety of sources as a basis for analysis, formulation of insights, adoption of strategies and evidence-based decision making.
+"Analytics Data Big" systems require a lot of organizational resources and therefore using cloud service providers for storage and processing is a common practice.
+In designing a distributed system of this type, there is no impediment to weaving a variety of services from several
+Providers, combining services sourced from the organization itself, into a complete solution.
+In the current project we have created a solution for processing and displaying data inspired by the "Lambda" template***
+
+
+<h4>The essence of the solution:</h4>
+
+***A system built from three subsystems that together enable monitoring of incoming calls to the Center Call in a "Near Real Time" approach and using a dashboard that displays key metrics, and allows early call type classification to route the nature of the call recommended to the answering provider.***
+
+<br>
+
+<h2> Project Structure: </h2>
 
 <br/>
 
@@ -10,7 +24,7 @@
 </br></br>
 
 ###
-<b>The project follows Model-View-Controller design pattern</b><br />
+<b> Every subsystem follows Model-View-Controller design pattern</b><br />
 <p align='center'><a href="#"><img align='center' src="https://i.imgur.com/IQi5nsu.png" width="400"></a></p>
 <br />
 
