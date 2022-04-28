@@ -16,7 +16,28 @@ In the current project we have created a solution for processing and displaying 
 
 <br>
 
-<h2> Project Structure: </h2>
+
+<h2 align = "center">Running the project</h2>
+
+<h3>Dependencies:</h3>
+
+* [NodeJS](https://nodejs.org/en/)  <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/assets/readme/nodedotjs-white.svg#gh-dark-mode-only" alt="Node" align=cetner width=24>
+
+* [Docker](https://www.docker.com/)
+
+  i. Redis image
+  
+  ii. SQL image (optional) / [mySQL workbench](https://www.mysql.com/downloads/)
+  
+  iii.MongoDB image (optional) / [MongoDB compass](https://www.mongodb.com/)
+
+<h3>Use the following cloud services:</h3>
+
+* [MongoDB](https://account.mongodb.com/account/login)
+* [kafka](https://www.cloudkarafka.com/)
+* [BigML](https://bigml.com/)
+
+<h2 align = "center"> Project Structure: </h2>
 
 <br/>
 
@@ -61,12 +82,12 @@ Dashborad             |  Dashborad
 
 <br/>
 
-## Teammates:
+<h3 align = "center"> Teammates: </h3>
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<table>
+<table align = "center">
   <tr>
     <td align="center"><a href="https://github.com/LiorAtiya"><img src="https://i.ibb.co/G9Nq6X0/Screenshot-2021-12-01-221123.png" width="150px;" alt=""/><br /><sub><b>Lior Atiya</b></sub></a><br /> </td>
     <td align="center"><a href="https://github.com/OfirOvadia96"><img src="https://imgur.com/8S5Bma2.png" width="120px;" alt=""/><br /><sub><b>Ofir Ovadia</b></sub></a><br /> </td>
