@@ -14,6 +14,19 @@
 <p align='center'><a href="#"><img align='center' src="https://i.imgur.com/IQi5nsu.png" width="400"></a></p>
 <br />
 
+<h2> Pages </h2>
+
+Call Center             |  Prediction model
+:-------------------------:|:-------------------------:
+![](https://imgur.com/z0bbdBC.png)  |  ![](https://imgur.com/t9S4I6c.png)
+
+
+Dashborad             |  Dashborad
+:-------------------------:|:-------------------------:
+![](https://imgur.com/Ml7OGgx.png)  |  ![](https://imgur.com/gJKBs7j.png)
+
+<br>
+
 <h3> Tools: </h3>
 
 <span>
