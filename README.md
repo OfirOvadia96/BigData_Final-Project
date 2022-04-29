@@ -88,7 +88,10 @@ Dashborad             |  Dashborad
 :-------------------------:|:-------------------------:
 ![](https://imgur.com/Ml7OGgx.png)  |  ![](https://imgur.com/gJKBs7j.png)
 
+
+<h2> </h2>
 <br>
+
 
 <h3>Technologies</h3>
 
@@ -107,7 +110,9 @@ Dashborad             |  Dashborad
    
 </span>
 
-<br/>
+<h2> </h2>
+
+<br>
 
 <h3 align = "center"> Teammates </h3>
 
