@@ -6,18 +6,22 @@
 <details open="open">
   <summary>Contents</summary>
   <ol>
-    <li><a href="Overview">Overview</a></li>
-   <li><a href="Running the project">Running the project</a></li>
-    <li><a href="Project Structure">Project Structure</a></li>
-    <li><a href="Pages">Pages</a></li>
-    <li><a href="Technologies">Technologies</a></li>
-    <li><a href="Teammates">Teammates</a></li>
+    <li>
+      <a href="#overview">Overview</a>
+    </li>
+   <li><a href="#running-the-project">Running the project</a></li>
+    <li><a href="#project-structure">Project Structure</a></li>
+    <li><a href="#pages">Pages</a></li>
+    <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#teammates">Teammates</a></li>
   </ol>
 </details>
 
 <br>
 
-<h3>Overview</h3>
+<h2 align = "center"> Overview </h2>
+
+
 
 ***We developed a solution based on the <a href="https://databricks.com/glossary/lambda-architecture">lambda architecture</a> for storing, processing and displaying data.
 The system consists of three subsystems that combine to allow monitoring of incoming calls in "Near Real Time", providing a dashboard that displays key metrics, and enabling early call type classification for the answering provider to route the call appropriately.***
@@ -93,7 +97,7 @@ Dashborad             |  Dashborad
 
 <br/>
 
-<h3 align = "center"> Teammates: </h3>
+<h3 align = "center"> Teammates </h3>
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
