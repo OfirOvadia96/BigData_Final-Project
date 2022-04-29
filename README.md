@@ -46,7 +46,7 @@ The system consists of three subsystems that combine to allow monitoring of inco
 <p align='center'><a href="#"><img align='center' src="https://i.imgur.com/IQi5nsu.png" width="400"></a></p>
 <br />
 
-<h2> Pages </h2>
+<h2 align = "center"> Pages: </h2>
 
 Call Center             |  Prediction model
 :-------------------------:|:-------------------------:
@@ -62,7 +62,6 @@ Dashborad             |  Dashborad
 <h3> Technologies: </h3>
 
 <span>
-   <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" alt="Heroku" height="30"/>
    <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="mySQL" height="30"/>
    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongoDB" height="30"/>
   <img src="https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white" alt="redis" height="30"/>
