@@ -2,7 +2,22 @@
 </p>
 
 
-<h3> Overview </h3>
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Contents</summary>
+  <ol>
+    <li><a href="Overview">Overview</a></li>
+   <li><a href="Running the project">Running the project</a></li>
+    <li><a href="Project Structure">Project Structure</a></li>
+    <li><a href="Pages">Pages</a></li>
+    <li><a href="Technologies">Technologies</a></li>
+    <li><a href="Teammates">Teammates</a></li>
+  </ol>
+</details>
+
+<br>
+
+<h3>Overview</h3>
 
 ***We developed a solution based on the <a href="https://databricks.com/glossary/lambda-architecture">lambda architecture</a> for storing, processing and displaying data.
 The system consists of three subsystems that combine to allow monitoring of incoming calls in "Near Real Time", providing a dashboard that displays key metrics, and enabling early call type classification for the answering provider to route the call appropriately.***
@@ -34,7 +49,7 @@ The system consists of three subsystems that combine to allow monitoring of inco
 * [kafka](https://www.cloudkarafka.com/)
 * [BigML](https://bigml.com/)
 
-<h2 align = "center"> Project Structure: </h2>
+<h2 align = "center">Project Structure</h2>
 
 <br/>
 
@@ -46,7 +61,7 @@ The system consists of three subsystems that combine to allow monitoring of inco
 <p align='center'><a href="#"><img align='center' src="https://i.imgur.com/IQi5nsu.png" width="400"></a></p>
 <br />
 
-<h2 align = "center"> Pages: </h2>
+<h2 align = "center">Pages</h2>
 
 Call Center             |  Prediction model
 :-------------------------:|:-------------------------:
@@ -59,7 +74,7 @@ Dashborad             |  Dashborad
 
 <br>
 
-<h3> Technologies: </h3>
+<h3>Technologies</h3>
 
 <span>
    <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="mySQL" height="30"/>
