@@ -53,6 +53,18 @@ The system consists of three subsystems that combine to allow monitoring of inco
 * [kafka](https://www.cloudkarafka.com/)
 * [BigML](https://bigml.com/)
 
+<h3>Getting Started:</h3>
+
+
+Clone the repository
+   ```sh
+   git clone https://github.com/OfirOvadia96/BigData_Final-Project.git
+   ```
+Install NPM packages
+   ```sh
+   npm install
+   ```
+
 <h2 align = "center">Project Structure</h2>
 
 <br/>
