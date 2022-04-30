@@ -8,9 +8,10 @@
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
-  },
-  "name": "server",
+  }
+  ,
   "scripts": {
-    "start": "nodemon serverA.js"
+      "start": "node serverA.js",
+      "devStart": "nodemon serverA.js"
   }
 }

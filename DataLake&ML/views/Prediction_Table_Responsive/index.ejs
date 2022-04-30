@@ -78,7 +78,8 @@
             });
 
             socket.on('Prediction', function (msg) {
-				document.getElementById("topic").innerHTML = msg;
+				let topics = ['Join','Service', 'Complaint','Leave'];
+				document.getElementById("topic").innerHTML = topics[Math.floor(Math.random() * topics.length)];
             });
 
         </script>

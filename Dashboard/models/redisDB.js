@@ -158,11 +158,15 @@ const redisDB = {
 
             //Reset each 10 minutes
             setTimeout(db.set("averageTime", 0), 600000);
+
+            //Reset each 1 hour;
+            setTimeout(db.set("averageTimePerHour", 0), 6000000);
         }
         
         //Current time is in seconds
         let value = await db.get("averageTime");
         await db.set("averageTime", value + totaltime);
+
     },
 
     getAverageTime: async function() {
@@ -178,7 +182,7 @@ const redisDB = {
         let calls = parseInt(await db.get("join")) + parseInt(await db.get("service")) + 
                     parseInt(await db.get("complaint")) + parseInt(await db.get("leave"));
         
-        return ((parseInt(totalTime)/calls)/60).toFixed(3); //In minutes
+        return ((parseInt(totalTime)/calls)).toFixed(3); //In minutes
     },
 }
 

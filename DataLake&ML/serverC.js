@@ -11,9 +11,6 @@ const kafka = require("./models/comsumeKafka");
 
 const controllerRouter = require('./routes/controller'); //controller
 
-const port = 3245
-//http://localhost:3245
-
 //--------------Middleware------------------
 
 app.set('view engine', 'ejs');
@@ -51,7 +48,7 @@ io.on("connection", (socket) => {
         var res = await BigML.createModel();
         setTimeout(function(){
             socket.emit("Model", res);
-        }, 5000);
+        }, 10000);
     });
 
     socket.on('Predict', async (msg) => 
@@ -65,4 +62,6 @@ io.on("connection", (socket) => {
 
 });
 
-server.listen(port, () => console.log(`BigML app listening at http://localhost:${port}`));
+const Port = process.env.PORT || 3002;
+//http://localhost:3002
+server.listen(Port, () => console.log(`BigML app listening at http://localhost:${Port}`));

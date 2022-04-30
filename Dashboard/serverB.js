@@ -4,12 +4,9 @@ var server = require('http').createServer(app)
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-// const kafka = require('./models/comsumeKafka');
+const kafka = require('./models/comsumeKafka');
 const redis = require("./models/redisDB");
 const controllerRouter = require('./routes/controller'); //controller
-
-const port = 3268
-//http://localhost:3268
 
 //--------------Middleware------------------
 app.set('view engine', 'ejs');
@@ -41,35 +38,35 @@ io.on("connection", async (socket) => {
 
 
 // ------------Consumer from Kafka-----------------
-// kafka.consumer.on("data", async (msg) => {
-//     const newCall = JSON.parse(msg.value);
+kafka.consumer.on("data", async (msg) => {
+    const newCall = JSON.parse(msg.value);
 
-//     // **Store the data in Redis and after send to Dashboard */
-//     if(String(msg.value).length < 100) //Total wating calls
-//     {
-//         redis.setTopic('TotalWaiting',parseInt(msg.value));
-//     }
-//     else if(String(msg.value).includes("topic")) // Details calls
-//     {   
+    // **Store the data in Redis and after send to Dashboard */
+    if(String(msg.value).length < 100) //Total wating calls
+    {
+        redis.setTopic('TotalWaiting',parseInt(msg.value));
+    }
+    else if(String(msg.value).includes("topic")) // Details calls
+    {   
 
-//         io.emit("New_Call",
-//         {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone
-//             , topic: newCall.topic, totaltime: newCall.totalTime});
+        io.emit("New_Call",
+        {firstname: newCall.firstName, lastname: newCall.lastName, phone: newCall.phone
+            , topic: newCall.topic, totaltime: newCall.totalTime});
 
-//         redis.setTopic(newCall.topic,0);
-//         redis.setCity(newCall.city);
-//         redis.setAverageTime(newCall.totalTime);
-//     }
+        redis.setTopic(newCall.topic,0);
+        redis.setCity(newCall.city);
+        redis.setAverageTime(newCall.totalTime);
+    }
 
-//     //Get data from redis to dashboard
-//     let allDataArray = await redis.getAllData();
-//     let getAverageTime = await redis.getAverageTime();
+    //Get data from redis to dashboard
+    let allDataArray = await redis.getAllData();
+    let getAverageTime = await redis.getAverageTime();
     
-//     //Send to front with socket
-//     io.emit('allData', 
-//     {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] ,
-//          leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
-// });
+    //Send to front with socket
+    io.emit('allData', 
+    {join: allDataArray[0],service: allDataArray[1], complaint: allDataArray[2] ,
+         leave: allDataArray[3], waiting: allDataArray[4], averageTotalTime: getAverageTime});
+});
 
 
 //----------------Front Side - Daily Call Center ------------------
@@ -78,4 +75,6 @@ app.use('/', controllerRouter);
 
 //------------------------------------------------
 
-server.listen(port, () => console.log(`Server B is listening at http://localhost:${port}`));
+const Port = process.env.PORT || 3001;
+//http://localhost:3001
+server.listen(Port, () => console.log(`Server B is listening at http://localhost:${Port}`));

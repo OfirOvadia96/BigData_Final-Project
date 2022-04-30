@@ -10,7 +10,7 @@ var source = new bigml.Source(connection);
 const BigML = {
   createModel: async function () {
     await mongodb.export2csv();
-    await sleep(250);
+    await sleep(200);
       source.create('callDetails.csv', function(error, sourceInfo) {
           if (!error && sourceInfo) {
               const dataset = new bigml.Dataset(connection);
@@ -38,6 +38,7 @@ const BigML = {
   predict: async function (toPredict) {
     var prediction = new bigml.Prediction(connection);
 
+    console.log("========== WHAT PREDICT: " + toPredict);
     fs.readFile('model.txt', 'utf8', function(err, data){
       prediction.create(data, toPredict ,function(error, prediction) { 
       
