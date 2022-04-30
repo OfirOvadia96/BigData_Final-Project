@@ -4,11 +4,8 @@ var server = require('http').createServer(app);
 const io = require("socket.io")(server, {
     allowEIO3: true // false by default
 });
-var db = require('./models/mysql');
 const kafka = require("./models/produceKafka");
 const controllerRouter = require('./routes/controller'); //controller
-
-const port = 3025
 
 
 const bodyParser = require('body-parser');
@@ -29,6 +26,8 @@ io.on("connection", (socket) => {
     socket.on("callDetails", (msg) => { kafka.publish(msg) });
 });
 
-server.listen(port, () => console.log(`Call Generator app listening at http://localhost:${port}`));
+const Port = process.env.PORT | 3000;
+//http://localhost:3000
+server.listen(Port, () => console.log(`Call Generator app listening at http://localhost:${Port}`));
 
 
